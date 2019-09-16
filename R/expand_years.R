@@ -4,13 +4,18 @@ expand_years <- function (
   years
 ) {
 
+  f <- function (...) return(years)
+
   nested <-
-    input_data %>%
-    mutate(
-      year = lapply(1:n(), function (...) years))
+    dplyr::mutate_at(
+      input_data,
+      vars(year),
+      ~ purrr::map(., f))
 
   expanded <-
-    unnest(nested)
+    tidyr::unnest(
+      nested,
+      cols = c(year))
 
   return(expanded)
 
