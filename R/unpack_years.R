@@ -11,39 +11,59 @@
 #' unpack_years(input_data)
 #'
 #' @export
-unpack_years <- function (input_data, year_var = NULL, verbose = getOption("verbose"))  {
+unpack_years <- function (
+  input_data,
+  year_var = NULL,
+  verbose = getOption("verbose")
+)  {
+
+  require(strtools)
 
   msg <- function (...) if(isTRUE(verbose)) message("[unpack_years] ", ...)
 
   if (is.null(year_var)) {
-    year_var <- vartools::find_var(input_data, suffix = "year(s?)")
+    year_var <-
+      vartools::find_var(
+        input_data,
+        suffix = "year(s?)")
   }
 
-  msg("unpacking ", year_var)
+  msg("year_var is: ", year_var)
 
-  unpacked <- local({
+  PACKED_YEARS_PATTERN <-
+    "^([A-Z]Y)([0-9]+:?[0-9]+?)$"
 
-    nested <- local({
-      packed <- pull(input_data, !!year_var)
-      cleaned <- str_remove_all(packed, "[)(]")
-      pattern <- "^([A-Z]Y)([0-9]+:?[0-9]+?)$"
-      mtx <- str_match(cleaned, pattern)
-      df <- as_tibble(mtx)
-      set_names(df, c(year_var, ".fun", ".rng"))
-    })
+  extracted_data <-
+    input_data %>%
+    mutate_at(
+      vars(year_var),
+      ~ stringr::str_remove_all(., "[)(]")) %>%
+    extract(
+      !!year_var,
+      into = c(".year_prefix", ".year_digits"),
+      regex = PACKED_YEARS_PATTERN,
+      remove = TRUE)
 
-    g <- function (.fun, .rng) { f <- get(.fun); x <- unlist(parse_integers(.rng)); f(x) }
-    nested[[year_var]] <- with(nested, map2(.fun, .rng, compose(as.character, g)))
+  nested_data <-
+    mutate(
+      extracted_data,
+      .year_digits = map(
+        .year_digits,
+        ~ unlist(strtools::parse_integers(.))))
 
-    recombined <- bind_cols(select(input_data, -one_of(year_var)), nested)
-    unnested <- unnest_(recombined, year_var)
-    select(unnested, -one_of(".fun", ".rng"))
+  unnested_data <-
+    unnest(
+      nested_data,
+      cols = c(.year_digits))
 
-  })
+  unpacked_data <-
+    unnested_data %>%
+    unite(
+      year,
+      .year_prefix,
+      .year_digits,
+      sep = "")
 
-  singular_form <- str_replace(year_var, "years$", "year")
-  renamed <- rename_(unpacked, .dots = set_names(year_var, singular_form))
-
-  return(renamed)
+  return(unpacked_data)
 
 }
