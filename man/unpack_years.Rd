@@ -2,13 +2,13 @@
 % Please edit documentation in R/unpack_years.R
 \name{unpack_years}
 \alias{unpack_years}
-\title{Unpack a vector of "packed years" (like RY or PY)}
+\title{unpack_years}
 \usage{
 unpack_years(input_data, year_var = NULL,
   verbose = getOption("verbose"))
 }
 \description{
-Unpack a vector of "packed years" (like RY or PY)
+Unpack a vector of "packed years" (like RY or PY) inside a tibble
 }
 \note{
 Might be slow and need optimization

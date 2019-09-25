@@ -1,8 +1,9 @@
-#' Unpack a vector of "packed years" (like RY or PY)
+#' unpack_years
+#'
+#' Unpack a vector of "packed years" (like RY or PY) inside a tibble
 #'
 #' @note Might be slow and need optimization
 #'
-#' @importFrom strtools unpack_integers
 #' @seealso [RY()] [PY()]
 #'
 #' @examples
@@ -16,8 +17,6 @@ unpack_years <- function (
   year_var = NULL,
   verbose = getOption("verbose")
 )  {
-
-  require(strtools)
 
   msg <- function (...) if(isTRUE(verbose)) message("[unpack_years] ", ...)
 
