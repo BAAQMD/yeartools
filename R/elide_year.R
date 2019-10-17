@@ -13,11 +13,11 @@ elide_year <- function (
   x <- as.character(x)
 
   prefixes <-
-    str_extract(x, "^[A-Z]Y") %>%
+    stringr::str_extract(x, "^[A-Z]Y") %>%
     unique()
 
   if (!all_true(is.na(prefixes))) {
-    msg("dropping ", str_csv(prefixes), " from year")
+    msg("dropping ", strtools::str_csv(prefixes), " from year")
   }
 
   parsed <-
