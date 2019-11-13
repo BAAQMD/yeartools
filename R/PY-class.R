@@ -10,7 +10,7 @@
 #' PY(2011:2014) %>% max()
 #'
 #' @export
-PY <- function (yyyy) {
-  yrs <- YYYY(yyyy, prefix = "PY")
+PY <- function (...) {
+  yrs <- YYYY(..., prefix = "PY")
   structure(yrs, class = c("PY", "YYYY"))
 }

@@ -13,7 +13,8 @@
 NULL
 
 #' @noRd
-YYYY <- function (yyyy, prefix) {
+YYYY <- function (..., prefix) {
+  yyyy <- c(...)
   stopifnot(is.numeric(yyyy))
   repr <- paste0(prefix, yyyy)
   structure(repr, class = "YYYY")

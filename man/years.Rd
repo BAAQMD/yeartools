@@ -9,13 +9,13 @@
 \alias{years}
 \title{Years (the DataBank way)}
 \usage{
-BY(yyyy)
+BY(...)
 
-CY(yyyy)
+CY(...)
 
-PY(yyyy)
+PY(...)
 
-RY(yyyy)
+RY(...)
 }
 \arguments{
 \item{yyyy}{four-digit integer(s)}

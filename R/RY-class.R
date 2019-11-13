@@ -7,7 +7,7 @@
 #' RY(2012:2016)
 #'
 #' @export
-RY <- function (yyyy) {
-  yrs <- YYYY(yyyy, prefix = "RY")
+RY <- function (...) {
+  yrs <- YYYY(..., prefix = "RY")
   structure(yrs, class = c("RY", "YYYY"))
 }
