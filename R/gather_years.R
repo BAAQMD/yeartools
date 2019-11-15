@@ -1,32 +1,54 @@
 #' gather_years
 #'
-#' @param input_data \code{data.frame} with columns of values named 1990, 2000, etc. (four-digit years)
-#' @param value_col name of column for gathered values
-#' @param ...  currently ignored
+#' Gather columns beginning with `CY`, `RY`, `PY`, as well as columns that look like "naive" four-digit years.
 #'
-#' @return \code{data.frame} with columns \code{year} (int) and \code{ems_qty} (optional: change name via \code{value}) (dbl)
+#' @param input_data tabular data
+#' @param ... name of column for gathered values; defaults to `ems_qty`
+#' @param pattern gather columns matching this regexp
+#' @param convert as in [tidyr::gather()] (runs [type.convert()])
+#' @param na.rm as in [tidyr::gather()] (drops rows from output where value would be `NA`)
+#' @param verbose display messages
+#'
+#' @return tabular data with column `year`
 #' @export
 #'
-gather_years <- function (input_data, value_col = "ems_qty", na.rm = FALSE, ...) {
+gather_years <- function (
+  input_data,
+  ...,
+  year_var = "year",
+  year_pattern = "([A-Z]Y)?[[:digit:]]{4}",
+  convert = TRUE,
+  na.rm = TRUE,
+  verbose = getOption("verbose")
+) {
+
+  msg <- function (...) if(isTRUE(verbose)) message("[gather_years] ", ...)
+
+  value_var <-
+    eval(substitute(alist(...)))
+
+  if (length(value_var) == 0) {
+    value_var <- "ems_qty"
+    msg("value_var defaulting to: ", value_var)
+  } else {
+    msg("value_var is: ", value_var)
+  }
 
   gather_vars <-
-    names(input_data) %>%
-    select_vars(dplyr::matches("([A-Z]Y)?[[:digit:]]{4}"))
+    tidyselect::vars_select(
+      names(input_data),
+      tidyselect::matches(year_pattern))
 
-  gathered <-
-    input_data %>%
-    tidyr::gather_("year", value_col, gather_vars, convert = TRUE)
+  msg("gather_vars is: ", str_csv(gather_vars))
 
-  if (isTRUE(na.rm)) {
+  gathered_data <-
+    tidyr::pivot_longer(
+      input_data,
+      cols = gather_vars,
+      names_to = year_var,
+      values_to = value_var,
+      values_drop_na = na.rm)
 
-    filter_dots <- lazyeval::interp(~ !is.na(var), var = as.name(value_col))
-    filtered <- filter_(gathered, .dots = filter_dots)
-    return(filtered)
-
-  } else {
-
-    return(gathered)
-
-  }
+  return(gathered_data)
 
 }

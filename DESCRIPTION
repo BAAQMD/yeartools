@@ -1,7 +1,7 @@
 Package: yeartools
 Type: Package
 Title: Provides CY, RY, PY, and BY classes and methods
-Version: 2019.11.12
+Version: 2019.11.15
 Author: David Holstius
 Maintainer: David Holstius <dholstius@baaqmd.gov>
 Description: More about what it does (maybe more than one line)
@@ -13,7 +13,9 @@ Depends:
   purrr,
   funtools,
   strtools
+Suggests:
+  lazyeval,
+  testthat
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Suggests: testthat
