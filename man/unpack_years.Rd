@@ -4,8 +4,7 @@
 \alias{unpack_years}
 \title{unpack_years}
 \usage{
-unpack_years(input_data, year_var = NULL,
-  verbose = getOption("verbose"))
+unpack_years(input_data, year_var = NULL, verbose = getOption("verbose"))
 }
 \description{
 Unpack a vector of "packed years" (like RY or PY) inside a tibble
