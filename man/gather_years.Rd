@@ -4,18 +4,32 @@
 \alias{gather_years}
 \title{gather_years}
 \usage{
-gather_years(input_data, value_col = "ems_qty", na.rm = FALSE, ...)
+gather_years(
+  input_data,
+  ...,
+  year_var = "year",
+  year_pattern = "([A-Z]Y)?[[:digit:]]{4}",
+  convert = TRUE,
+  na.rm = TRUE,
+  verbose = getOption("verbose")
+)
 }
 \arguments{
-\item{input_data}{\code{data.frame} with columns of values named 1990, 2000, etc. (four-digit years)}
+\item{input_data}{tabular data}
 
-\item{value_col}{name of column for gathered values}
+\item{...}{name of column for gathered values; defaults to `ems_qty`}
 
-\item{...}{currently ignored}
+\item{convert}{as in [tidyr::gather()] (runs [type.convert()])}
+
+\item{na.rm}{as in [tidyr::gather()] (drops rows from output where value would be `NA`)}
+
+\item{verbose}{display messages}
+
+\item{pattern}{gather columns matching this regexp}
 }
 \value{
-\code{data.frame} with columns \code{year} (int) and \code{ems_qty} (optional: change name via \code{value}) (dbl)
+tabular data with column `year`
 }
 \description{
-gather_years
+Gather columns beginning with `CY`, `RY`, `PY`, as well as columns that look like "naive" four-digit years.
 }
