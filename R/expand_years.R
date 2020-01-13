@@ -8,25 +8,41 @@ expand_years <- function (
 
   msg <- function (...) if(isTRUE(verbose)) message("[expand_years] ", ...)
 
-  f <- function (...) return(years)
-
   if (year_var %not_in% names(input_data)) {
     warn_msg <- paste0("`", year_var, "` isn't in your original data; adding it")
     msg(warn_msg)
-    input_data$year <- NA_integer_
+    input_data[[year_var]] <- factor(NA, levels = unique(years))
   }
 
-  nested <-
-    dplyr::mutate_at(
+  chopped_data <-
+    tidyr::chop(
       input_data,
+      !!year_var)
+
+  mutated_data <-
+    mutate_at(
+      chopped_data,
       vars(year_var),
-      ~ purrr::map(., f))
+      ~ map(., function (...) return(years)))
 
-  expanded <-
-    tidyr::unnest(
-      nested,
-      cols = c(year_var))
+  unchopped_data <-
+    tidyr::unchop(
+      mutated_data,
+      !!year_var)
 
-  return(expanded)
+  tidied_data <-
+    unchopped_data %>%
+    select(
+      names(input_data))
+
+  if (inherits(years, "CY")) {
+    tidied_data <-
+      mutate_at(
+        tidied_data,
+        vars(year_var),
+        ~ CY(elide_year(.)))
+  }
+
+  return(tidied_data)
 
 }
