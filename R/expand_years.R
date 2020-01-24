@@ -32,7 +32,7 @@ expand_years <- function (
 
   tidied_data <-
     unchopped_data %>%
-    select(
+    dplyr::select(
       names(input_data))
 
   if (inherits(years, "CY")) {
