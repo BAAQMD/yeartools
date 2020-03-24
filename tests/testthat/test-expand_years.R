@@ -7,11 +7,10 @@ test_that("handles a single varying ancillary attribute", {
       year = c(2012, 2015),
       foo = c("bar", "baz"))
 
-  expect_silent(
-    expanded <-
-      expand_years(
-        input_data,
-        2011:2017))
+  expanded <-
+    expand_years(
+      input_data,
+      2011:2017)
 
   expect_equal(
     expanded,
