@@ -14,8 +14,8 @@ Depends:
   funtools,
   strtools
 Suggests:
-  lazyeval,
-  testthat
+    lazyeval,
+    testthat (>= 2.1.0)
 Imports:
   pillar
 Encoding: UTF-8

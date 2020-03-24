@@ -12,15 +12,21 @@ expected_data <-
     year = c("CY2011", "CY2012", "CY2011", "CY2012"),
     ems_qty = c(345.6, 432, 23.1, 98))
 
-test_that("no arguments (defaulting to ems_qty)", {
+test_that("warn if missing `value_var` (then default to ems_qty)", {
 
   expected <-
     expected_data
 
-  test_data %>%
-    gather_years() %>%
-    expect_equivalent(
-      expected)
+  expect_warning(
+    result <-
+      test_data %>%
+      gather_years(
+        verbose = TRUE),
+    "value_var")
+
+  expect_equivalent(
+    result,
+    expected)
 
 })
 
@@ -33,7 +39,8 @@ test_that("one symbol argument (NSE)", {
 
   test_data %>%
     gather_years(
-      foo) %>%
+      foo,
+      verbose = TRUE) %>%
     expect_equivalent(
       expected)
 
@@ -48,8 +55,26 @@ test_that("one unnamed character argument", {
 
   test_data %>%
     gather_years(
-      "bar") %>%
+      "bar",
+      verbose = TRUE) %>%
     expect_equivalent(
       expected)
 
 })
+
+test_that("one variable argument (NSE)", {
+
+  expected <-
+    expected_data
+
+  qty_var <- "ems_qty"
+
+  test_data %>%
+    gather_years(
+      !!qty_var,
+      verbose = TRUE) %>%
+    expect_equivalent(
+      expected)
+
+})
+
