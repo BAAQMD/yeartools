@@ -12,12 +12,10 @@ test_that("type_sum works", {
 
 })
 
-test_that("printing works", {
+test_that("tibble display works", {
 
   test_data <-
     tibble::tibble(
       year = CY(2015:2018))
-
-  print(test_data)
 
 })

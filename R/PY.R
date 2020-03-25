@@ -1,3 +1,6 @@
+#' @include YYYY.R
+
+#' @family years
 #' @describeIn years Permit year(s)
 #' @inheritParams years
 #'

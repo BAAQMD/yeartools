@@ -38,6 +38,6 @@ test_that("as.numeric works", {
 
   expect_equal(
     as.numeric(CY(2015:2018)),
-    as.numeric(as.POSIXct(str_c(2015:2018, "-01-01"))))
+    as.numeric(2015:2018))
 
 })

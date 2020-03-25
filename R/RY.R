@@ -1,9 +1,8 @@
+#' @include YYYY.R
+
+#' @family years
 #' @describeIn years Reporting year(s)
 #' @inheritParams years
-#'
-#' @examples
-#' RY(2015)
-#' RY(2012:2016)
 #'
 #' @export
 RY <- function (...) {

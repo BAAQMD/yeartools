@@ -1,9 +1,9 @@
-#' @name years
-#' @rdname years
-#'
-#' Years (the DataBank way)
+#' YYYY
 #'
 #' This family of functions helps to index requests for DataBank "files".
+#'
+#' @rdname years
+#' @name years
 #'
 #' @note **FIXME: more and better description.** Why do we need these? What are they for?
 #'
@@ -42,35 +42,36 @@ as_YYYY <- function (x) {
 
 #' @noRd
 #' @export
-as.character.YYYY <- function (from) {
-  unclass(from)
+as.character.YYYY <- function (x) {
+  unclass(x)
 }
 
 #' @noRd
 #' @export
-as.integer.YYYY <- function (from) {
-  readr::parse_number(from)
+as.integer.YYYY <- function (x) {
+  readr::parse_number(x)
 }
 
 #' @noRd
 #' @export
-as.Date.YYYY <- function (from, ..., tz = "") {
-  datestamp <- str_c(as.integer(from), "-01-01")
+as.Date.YYYY <- function (x, ..., tz = "") {
+  datestamp <- str_c(as.integer(x), "-01-01")
   as.Date(datestamp, tz = tz, ...)
 }
 
 #' @noRd
 #' @export
-as.POSIXct.YYYY <- function (from, tz = "") {
-  dttm <- ISOdatetime(as.integer(from), 01, 01, 00, 00, 00, tz = tz)
+as.POSIXct.YYYY <- function (x, tz = "") {
+  dttm <- ISOdatetime(as.integer(x), 01, 01, 00, 00, 00, tz = tz)
   as.POSIXct(dttm, tz = tz)
 }
 
 #' @noRd
 #' @export
-as.double.YYYY <- function (from, ...) {
-  dttm <- as.POSIXct(from, ...)
-  as.double(dttm)
+as.double.YYYY <- function (x, ...) {
+  #dttm <- as.POSIXct(x, ...)
+  #as.double(dttm)
+  as.double(as.integer(x, ...))
 }
 
 #'----------------------------------------------------------------------

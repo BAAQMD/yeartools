@@ -21,3 +21,17 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
+Collate: 
+    'YYYY.R'
+    'BY.R'
+    'CY.R'
+    'PY.R'
+    'RY.R'
+    'elide_year.R'
+    'elide_years.R'
+    'expand_years.R'
+    'gather_years.R'
+    'ndays_in.R'
+    'parse_year.R'
+    'spread_years.R'
+    'unpack_years.R'
