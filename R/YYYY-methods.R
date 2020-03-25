@@ -12,8 +12,23 @@ as.integer.YYYY <- function (from) {
 
 #' @noRd
 #' @export
-as.double.YYYY <- function (from) {
-  as.integer.YYYY(from)
+as.Date.YYYY <- function (from, ..., tz = "") {
+  datestamp <- str_c(as.integer(from), "-01-01")
+  as.Date(datestamp, tz = tz, ...)
+}
+
+#' @noRd
+#' @export
+as.POSIXct.YYYY <- function (from, tz = "") {
+  dttm <- ISOdatetime(as.integer(from), 01, 01, 00, 00, 00, tz = tz)
+  as.POSIXct(dttm, tz = tz)
+}
+
+#' @noRd
+#' @export
+as.double.YYYY <- function (from, ...) {
+  dttm <- as.POSIXct(from, ...)
+  as.double(dttm)
 }
 
 #' @noRd
