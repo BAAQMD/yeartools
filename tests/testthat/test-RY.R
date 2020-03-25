@@ -12,7 +12,7 @@ test_that("RY alone", {
     yrs,
     c("RY", "YYYY"))
 
-  expect_identical(
+  expect_equivalent(
     as.character(yrs),
     paste0("RY", 2011:2014))
 

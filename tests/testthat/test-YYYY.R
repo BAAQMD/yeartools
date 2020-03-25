@@ -1,5 +1,5 @@
 test_that("as.character works", {
-  expect_equal(
+  expect_equivalent(
     as.character(CY(2015:2018)),
     str_c("CY", 2015:2018))
 })
