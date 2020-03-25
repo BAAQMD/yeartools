@@ -12,11 +12,9 @@ as.integer.YYYY <- function (from) {
 
 #' @noRd
 #' @export
-as.numeric.YYYY <- function (from) {
+as.double.YYYY <- function (from) {
   as.integer.YYYY(from)
 }
-
-# library(tibble)
 
 #' @noRd
 print.YYYY <- function (yyyy, ...) {
