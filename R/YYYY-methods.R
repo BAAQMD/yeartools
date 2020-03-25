@@ -10,6 +10,12 @@ as.integer.YYYY <- function (from) {
   readr::parse_number(from)
 }
 
+#' @noRd
+#' @export
+as.numeric.YYYY <- function (from) {
+  as.integer.YYYY(from)
+}
+
 # library(tibble)
 
 #' @noRd
