@@ -6,26 +6,28 @@
 \usage{
 gather_years(
   input_data,
-  ...,
+  value_var,
   year_var = "year",
-  year_pattern = "([A-Z]Y)?[[:digit:]]{4}",
-  convert = TRUE,
+  pattern = "([A-Z]Y)?[[:digit:]]{4}",
+  transform = identity,
   na.rm = TRUE,
   verbose = getOption("verbose")
 )
 }
 \arguments{
-\item{input_data}{tabular data}
+\item{input_data}{(tabular data)}
 
-\item{...}{name of column for gathered values; defaults to `ems_qty`}
+\item{value_var}{(character or symbol) defaults to "ems_qty"}
 
-\item{convert}{as in [tidyr::gather()] (runs [type.convert()])}
+\item{year_var}{(character)}
 
-\item{na.rm}{as in [tidyr::gather()] (drops rows from output where value would be `NA`)}
+\item{pattern}{(regexp) gather columns matching this}
 
-\item{verbose}{display messages}
+\item{transform}{(formula or function) applied to resulting column using `mutate_at()`}
 
-\item{pattern}{gather columns matching this regexp}
+\item{na.rm}{(logical) drop rows from output where value would be `NA`}
+
+\item{verbose}{(logical) display messages}
 }
 \value{
 tabular data with column `year`
