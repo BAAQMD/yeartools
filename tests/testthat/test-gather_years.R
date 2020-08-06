@@ -24,7 +24,7 @@ test_that("warn if missing `value_var` (then default to ems_qty)", {
         verbose = TRUE),
     "value_var")
 
-  expect_equivalent(
+  expect_equivalent_data(
     result,
     expected)
 
@@ -41,7 +41,7 @@ test_that("one symbol argument (NSE)", {
     gather_years(
       foo,
       verbose = TRUE) %>%
-    expect_equivalent(
+    expect_equivalent_data(
       expected)
 
 })
@@ -57,7 +57,7 @@ test_that("one unnamed character argument", {
     gather_years(
       "bar",
       verbose = TRUE) %>%
-    expect_equivalent(
+    expect_equivalent_data(
       expected)
 
 })
@@ -73,7 +73,7 @@ test_that("one variable argument (NSE)", {
     gather_years(
       !!qty_var,
       verbose = TRUE) %>%
-    expect_equivalent(
+    expect_equivalent_data(
       expected)
 
 })

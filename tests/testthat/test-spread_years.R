@@ -46,7 +46,7 @@ test_that("if missing `value_var`, then default to result of `find_qty_var()`", 
         value_var = ems_qty,
         verbose = FALSE))
 
-  expect_equivalent(
+  expect_equivalent_data(
     result,
     mutate(expected_data, tput_qty = 999))
 

@@ -1,0 +1,11 @@
+> print(CY_data)
+# A tibble: 6 x 1
+  year  
+  <CY>  
+1 CY2010
+2 CY2011
+3 CY2012
+4 CY2013
+5 CY2014
+6 CY2015
+
