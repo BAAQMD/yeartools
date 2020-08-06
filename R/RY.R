@@ -1,8 +1,8 @@
 #' @include YYYY.R
 
-#' @family years
-#' @describeIn years Reporting year(s)
-#' @inheritParams years
+#' @family YYYY
+#' @describeIn YYYY Reporting year(s)
+#' @inheritParams YYYY
 #'
 #' @export
 RY <- function (...) {
@@ -13,7 +13,7 @@ RY <- function (...) {
 #' @noRd
 #' @export
 as_RY <- function (x) {
-  x <- structure(x, class = "RY")
+  x <- structure(x, class = c("RY", "YYYY"))
   return(x)
 }
 
@@ -27,7 +27,6 @@ as_RY <- function (x) {
 #'----------------------------------------------------------------------
 
 #' @noRd
-#' @export
-type_sum.RY <- function (RY, ...) {
+vec_ptype_abbr.RY <- function (RY, ...) {
   "RY"
 }

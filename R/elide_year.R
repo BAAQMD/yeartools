@@ -2,6 +2,9 @@
 #'
 #' To elide distinctions between "CY", "BY", "RY", etc.
 #'
+#' @param x `RY`, `PY`, `CY`, or `BY` object
+#' @param verbose display messages
+#'
 #' @export
 elide_year <- function (
   x,
@@ -13,10 +16,10 @@ elide_year <- function (
   x <- as.character(x)
 
   prefixes <-
-    stringr::str_extract(x, "^[A-Z]Y") %>%
-    unique()
+    unique(
+      stringr::str_extract(x, "^[A-Z]Y"))
 
-  if (!all_true(is.na(prefixes))) {
+  if (isFALSE(funtools::all_true(is.na(prefixes)))) {
     msg("dropping ", strtools::str_csv(prefixes), " from year")
   }
 

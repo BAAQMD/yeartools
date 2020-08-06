@@ -6,6 +6,13 @@
 \usage{
 unpack_years(input_data, year_var = NULL, verbose = getOption("verbose"))
 }
+\arguments{
+\item{input_data}{tabular data}
+
+\item{year_var}{character or `NULL`}
+
+\item{verbose}{display messages}
+}
 \description{
 Unpack a vector of "packed years" (like RY or PY) inside a tibble
 }

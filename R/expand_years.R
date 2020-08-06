@@ -1,3 +1,17 @@
+#' expand_years
+#'
+#' @param input_data tabular data
+#' @param years vector of class `YYYY` that you want to expand across
+#' @param year_var character
+#' @param verbose display messages
+#'
+#' @importFrom dplyr vars
+#' @importFrom funtools `%not_in%`
+#' @importFrom tidyr chop unchop
+#' @importfrom tidyselect all_of
+#' @importFrom dplyr mutate_at select
+#' @importFrom purrr map
+#'
 #' @export
 expand_years <- function (
   input_data,
@@ -20,10 +34,10 @@ expand_years <- function (
       !!year_var)
 
   mutated_data <-
-    mutate_at(
+    dplyr::mutate_at(
       chopped_data,
       vars(year_var),
-      ~ map(., function (...) return(years)))
+      ~ purrr::map(., function (...) return(years)))
 
   unchopped_data <-
     tidyr::unchop(
@@ -31,15 +45,15 @@ expand_years <- function (
       !!year_var)
 
   tidied_data <-
-    unchopped_data %>%
     dplyr::select(
+      unchopped_data,
       names(input_data))
 
   if (inherits(years, "CY")) {
     tidied_data <-
-      mutate_at(
+      dplyr::mutate_at(
         tidied_data,
-        vars(year_var),
+        vars(all_of(year_var)),
         ~ CY(elide_year(.)))
   }
 

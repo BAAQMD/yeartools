@@ -6,6 +6,11 @@
 \usage{
 \method{[}{YYYY}(x, i)
 }
+\arguments{
+\item{x}{`YYYY` object}
+
+\item{i}{integer}
+}
 \description{
 ----------------------------------------------------------------------
 }

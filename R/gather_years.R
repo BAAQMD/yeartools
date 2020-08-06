@@ -44,7 +44,7 @@ gather_years <- function (
       names(input_data),
       ~ stringr::str_detect(., pattern))
 
-  msg("gathering: ", str_csv(gather_vars))
+  msg("gathering: ", strtools::str_csv(gather_vars))
 
   gathered_data <-
     tidyr::gather(

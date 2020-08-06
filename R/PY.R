@@ -1,8 +1,8 @@
 #' @include YYYY.R
 
-#' @family years
+#' @family YYYY
 #' @describeIn years Permit year(s)
-#' @inheritParams years
+#' @inheritParams YYYY
 #'
 #' @export
 PY <- function (...) {
@@ -27,7 +27,6 @@ as_PY <- function (x) {
 #'----------------------------------------------------------------------
 
 #' @noRd
-#' @export
-type_sum.PY <- function (PY, ...) {
+vec_ptype_abbr.PY <- function (PY, ...) {
   "PY"
 }

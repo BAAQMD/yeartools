@@ -2,6 +2,10 @@
 #'
 #' Unpack a vector of "packed years" (like RY or PY) inside a tibble
 #'
+#' @param input_data tabular data
+#' @param year_var character or `NULL`
+#' @param verbose display messages
+#'
 #' @note Might be slow and need optimization
 #'
 #' @seealso [RY()] [PY()]
@@ -10,6 +14,11 @@
 #' input_data <- tibble(year = c("RY(2007:2009)", "RY(2001)", "PY(2003)"), ems_qty = c(111, 22, 45))
 #' unpack_years(input_data, year_var = "year")
 #' unpack_years(input_data)
+#'
+#' @importFrom vartools find_year_var
+#' @importFrom stringr str_remove_all
+#' @importFrom tidyr extract unnest
+#' @importFrom dplyr mutate_at mutate
 #'
 #' @export
 unpack_years <- function (
@@ -32,35 +41,38 @@ unpack_years <- function (
   PACKED_YEARS_PATTERN <-
     "^([A-Z]Y)([0-9]+:?[0-9]+?)$"
 
-  extracted_data <-
-    input_data %>%
-    mutate_at(
+  cleaned_data <-
+    dplyr::mutate_at(
+      input_data,
       vars(year_var),
-      ~ stringr::str_remove_all(., "[)(]")) %>%
-    extract(
+      ~ stringr::str_remove_all(., "[)(]"))
+
+  extracted_data <-
+    tidyr::extract(
+      cleaned_data,
       !!year_var,
       into = c(".year_prefix", ".year_digits"),
       regex = PACKED_YEARS_PATTERN,
       remove = TRUE)
 
   nested_data <-
-    mutate(
+    dplyr::mutate_at(
       extracted_data,
-      .year_digits = map(
-        .year_digits,
-        ~ unlist(strtools::parse_integers(.))))
+      vars(all_of(".year_digits")),
+      sapply,
+      FUN = function (x) unlist(strtools::parse_integers(x)))
 
   unnested_data <-
-    unnest(
+    tidyr::unnest(
       nested_data,
       cols = c(.year_digits))
 
   unpacked_data <-
-    unnested_data %>%
-    unite(
+    tidyr::unite(
+      unnested_data,
       year,
-      .year_prefix,
-      .year_digits,
+      ".year_prefix",
+      ".year_digits",
       sep = "")
 
   return(unpacked_data)

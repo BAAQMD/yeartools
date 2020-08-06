@@ -6,6 +6,11 @@
 \usage{
 \method{[}{CY}(x, i)
 }
+\arguments{
+\item{x}{`CY` object}
+
+\item{i}{integer}
+}
 \description{
 ----------------------------------------------------------------------
 }

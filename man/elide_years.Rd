@@ -2,9 +2,20 @@
 % Please edit documentation in R/elide_years.R
 \name{elide_years}
 \alias{elide_years}
+\alias{elide_years.default}
+\alias{elide_years.data.frame}
 \title{elide_years}
 \usage{
 elide_years(x, ...)
+
+\method{elide_years}{default}(x, ...)
+
+\method{elide_years}{data.frame}(x, ...)
+}
+\arguments{
+\item{x}{`CY`, `BY`, `RY`, or `PY` object}
+
+\item{...}{futher arguments}
 }
 \description{
 To elide distinctions between "CY", "BY", "RY", etc.

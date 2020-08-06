@@ -6,6 +6,11 @@
 \usage{
 elide_year(x, verbose = getOption("verbose"))
 }
+\arguments{
+\item{x}{`RY`, `PY`, `CY`, or `BY` object}
+
+\item{verbose}{display messages}
+}
 \description{
 To elide distinctions between "CY", "BY", "RY", etc.
 }

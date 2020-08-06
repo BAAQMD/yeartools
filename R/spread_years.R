@@ -10,6 +10,11 @@
 #' @param verbose (logical) display messages
 #'
 #' @return tabular data with column `year`
+#'
+#' @importFrom tidyr spread
+#' @importFrom rlang enquo
+#' @importFrom vartools find_year_var
+#'
 #' @export
 #'
 spread_years <- function (

@@ -1,8 +1,8 @@
 #' @include YYYY.R
 
-#' @family years
-#' @describeIn years Calendar year(s)
-#' @inheritParams years
+#' @family YYYY
+#' @describeIn YYYY Calendar year(s)
+#' @inheritParams YYYY
 #'
 #' @export
 CY <- function (...) {
@@ -10,6 +10,8 @@ CY <- function (...) {
   structure(yrs, class = c("CY", "YYYY"))
 }
 
+#' @param x `CY` object
+#'
 #' @noRd
 #' @export
 as_CY <- function (x) {
@@ -19,6 +21,9 @@ as_CY <- function (x) {
 
 #'----------------------------------------------------------------------
 
+#' @param x `CY` object
+#' @param i integer
+#'
 #' @export
 `[.CY` <- function(x, i) {
   as_CY(NextMethod())
@@ -26,8 +31,10 @@ as_CY <- function (x) {
 
 #'----------------------------------------------------------------------
 
+#' @param x `CY` vector
+#' @param ...
+#'
 #' @noRd
-#' @export
-type_sum.CY <- function (CY, ...) {
+vec_ptype_abbr.CY <- function (x, ...) {
   "CY"
 }

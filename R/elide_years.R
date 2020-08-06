@@ -2,21 +2,24 @@
 #'
 #' To elide distinctions between "CY", "BY", "RY", etc.
 #'
+#' @param x `CY`, `BY`, `RY`, or `PY` object
+#' @param ... futher arguments
+#'
+#' @importfrom tidyselect all_of
+#'
 #' @export
 elide_years <- function (x, ...) {
   UseMethod("elide_years")
 }
 
-#' elide_years
-#'
+#' @rdname elide_years
 #' @method elide_years default
 #' @export
 elide_years.default <- function (x, ...) {
   elide_year(x, ...)
 }
 
-#' elide_years
-#'
+#' @rdname elide_years
 #' @method elide_years data.frame
 #' @export
 elide_years.data.frame <- function (x, ...) {
@@ -26,7 +29,7 @@ elide_years.data.frame <- function (x, ...) {
     result <-
       dplyr::mutate_at(
         x,
-        vars(year),
+        vars(all_of("year")),
         ~ elide_year(., ...))
 
   } else {

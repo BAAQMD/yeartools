@@ -2,12 +2,10 @@
 #'
 #' This family of functions helps to index requests for DataBank "files".
 #'
-#' @rdname years
-#' @name years
+#' @param ... integer(s)
+#' @param prefix character
 #'
 #' @note **FIXME: more and better description.** Why do we need these? What are they for?
-#'
-#' @param yyyy four-digit integer(s)
 #'
 #' @seealso [DB_XXXX_CONCORDANCE]
 #'
@@ -16,21 +14,19 @@
 #' CY(2011:2014) %>% inherits("YYYY")
 #' PY(2011:2014) %>% as.character()
 #' BY(2011:2014) %>% as.integer()
-#' PY(2011:2014) - 1 # can add and subtract
 #' CY(2011:2014) %>% max()
 #'
-NULL
-
-#' @noRd
 #' @export
 YYYY <- function (..., prefix) {
-  yyyy <- c(...)
-  stopifnot(is.numeric(yyyy))
-  x <- paste0(prefix, yyyy)
+  x <- c(...)
+  stopifnot(is.numeric(x))
+  x <- paste0(prefix, x)
   x <- as_YYYY(x)
   return(x)
 }
 
+#' @param x `YYYY` object
+#'
 #' @noRd
 #' @export
 as_YYYY <- function (x) {
@@ -40,30 +36,44 @@ as_YYYY <- function (x) {
 
 #'----------------------------------------------------------------------
 
+#' @param x `YYYY` object
+#' @param ... ignored
+#'
 #' @noRd
 #' @export
-as.character.YYYY <- function (x) {
+as.character.YYYY <- function (x, ...) {
   unclass(x)
 }
 
+#' @param x `YYYY` object
+#' @param ... ignored
+#'
 #' @noRd
 #' @export
-as.integer.YYYY <- function (x) {
-  readr::parse_number(x)
+as.integer.YYYY <- function (x, ...) {
+  readr::parse_number(x, ...)
 }
 
+#' @param x `YYYY` object
+#' @param tz character
+#' @param ... ignored
+#'
 #' @noRd
 #' @export
 as.Date.YYYY <- function (x, ..., tz = "") {
-  datestamp <- str_c(as.integer(x), "-01-01")
+  datestamp <- stringr::str_c(as.integer(x), "-01-01")
   as.Date(datestamp, tz = tz, ...)
 }
 
+#' @param x `YYYY` object
+#' @param tz character
+#' @param ... further arguments to [as.POSIXct()]
+#'
 #' @noRd
 #' @export
-as.POSIXct.YYYY <- function (x, tz = "") {
+as.POSIXct.YYYY <- function (x, tz = "", ...) {
   dttm <- ISOdatetime(as.integer(x), 01, 01, 00, 00, 00, tz = tz)
-  as.POSIXct(dttm, tz = tz)
+  as.POSIXct(dttm, tz = tz, ...)
 }
 
 #' @noRd
@@ -76,55 +86,76 @@ as.double.YYYY <- function (x, ...) {
 
 #'----------------------------------------------------------------------
 
+#' @param e1 `YYYY` object
+#' @param e2 `YYYY` object
+#'
 #' @noRd
 `+.YYYY` <- function (e1, e2) {
   stopifnot(is.numeric(e2))
   cls <- dplyr::first(class(e1))
-  do.call(cls, list(yyyy = as.integer(e1) + e2))
+  do.call(cls, list(x = as.integer(e1) + e2))
 }
 
+#' @param e1 `YYYY` object
+#' @param e2 `YYYY` object
+#'
 #' @noRd
 `-.YYYY` <- function (e1, e2) {
   stopifnot(is.numeric(e2))
   cls <- dplyr::first(class(e1))
-  do.call(cls, list(yyyy = as.integer(e1) - e2))
+  do.call(cls, list(x = as.integer(e1) - e2))
 }
 
 #'----------------------------------------------------------------------
 
+#' @param x `YYYY` object
+#' @param ... ignored
+#'
 #' @noRd
-min.YYYY <- function (yyyy, ...) {
-  values <- as.integer(yyyy)
+min.YYYY <- function (x, ...) {
+  values <- as.integer(x)
   i <- which.min(values)
-  cls <- dplyr::first(class(yyyy))
-  do.call(cls, list(yyyy = values[i]))
+  cls <- dplyr::first(class(x))
+  do.call(cls, list(x = values[i]))
 }
 
+#' @param x `YYYY` object
+#' @param ... ignored
+#'
 #' @noRd
-max.YYYY <- function (yyyy, ...) {
-  values <- as.integer(yyyy)
+max.YYYY <- function (x, ...) {
+  values <- as.integer(x)
   i <- which.max(values)
-  cls <- dplyr::first(class(yyyy))
-  do.call(cls, list(yyyy = values[i]))
+  cls <- dplyr::first(class(x))
+  do.call(cls, list(x = values[i]))
 }
 
+#' @param x `YYYY` object
+#' @param ... ignored
+#'
 #' @noRd
-range.YYYY <- function (yyyy, ...) {
-  values <- as.integer(yyyy)
+range.YYYY <- function (x, ...) {
+  values <- as.integer(x)
   i <- c(which.min(values), which.max(values))
-  cls <- dplyr::first(class(yyyy))
-  do.call(cls, list(yyyy = values[i]))
+  cls <- dplyr::first(class(x))
+  do.call(cls, list(x = values[i]))
 }
 
 #'----------------------------------------------------------------------
 
+#' @param x `YYYY` object
+#' @param ...
+#'
 #' @noRd
-print.YYYY <- function (yyyy, ...) {
-  cat(as.character(yyyy))
+print.YYYY <- function (x, ...) {
+  cat(as.character(x))
 }
 
 #'----------------------------------------------------------------------
 
+#' @param x `YYYY` object
+#' @param i integer
+#'
 #' @export
 `[.YYYY` <- function(x, i) {
   as_YYYY(NextMethod())
@@ -133,7 +164,6 @@ print.YYYY <- function (yyyy, ...) {
 #'----------------------------------------------------------------------
 
 #' @noRd
-#' @export
-type_sum.YYYY <- function (yyyy, ...) {
+vec_ptype_abbr.YYYY <- function (x, ...) {
   "YYYY"
 }

@@ -1,8 +1,8 @@
 #' @include YYYY.R
 
-#' @family years
-#' @describeIn years Base year(s)
-#' @inheritParams years
+#' @family YYYY
+#' @describeIn YYYY Base year(s)
+#' @inheritParams YYYY
 #'
 #' @export
 BY <- function (...) {
@@ -27,7 +27,6 @@ as_BY <- function (x) {
 #'----------------------------------------------------------------------
 
 #' @noRd
-#' @export
-type_sum.BY <- function (BY, ...) {
+vec_ptype_abbr.BY <- function (BY, ...) {
   "BY"
 }

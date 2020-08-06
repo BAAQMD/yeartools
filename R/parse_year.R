@@ -22,8 +22,8 @@ parse_year <- function (x, ...) {
 #' @export
 parse_year.character <- function (x, ...) {
   parsed <- as.integer(readr::parse_number(x))
-  is_four_digits <- (parsed >= 1000) && (parsed <= 9999)
-  if (!all_true(is_four_digits)) {
+  is_four_digits <- (parsed >= 1000) & (parsed <= 9999)
+  if (isFALSE(all(is_four_digits, na.rm = TRUE))) {
     err_msg <- stringr::str_c(
       "some parsed values are not four digits")
     stop(err_msg)
@@ -42,12 +42,12 @@ parse_year.YYYY <- function (x, ...) {
 #' @export
 parse_year.default <- function (x, ...) {
 
-  if (hasMethod("as.character", class(x))) {
+  if (methods::hasMethod("as.character", class(x))) {
     parsed <- parse_year.character(as.character(x))
     return(parsed)
   }
 
-  err_msg <- str_c("[parse_year] Don't know how to parse an object of class ", class(x))
+  err_msg <- stringr::str_c("[parse_year] Don't know how to parse an object of class ", class(x))
   stop(err_msg)
 
 }
