@@ -1,169 +1,52 @@
-#' YYYY
+#' @name YYYY
 #'
-#' This family of functions helps to index requests for DataBank "files".
+#' @title Years with explicit timelines
 #'
-#' @param ... integer(s)
-#' @param prefix character
+#' @description
+#' This family of functions helps to index requests for DataBank "files",
+#'     and helps with the construction of "base year" emission inventories.
 #'
-#' @note **FIXME: more and better description.** Why do we need these? What are they for?
+#' The constructors `RY()`, `PY()`, etc. all yield instances of a very simple "S3" class (`YYYY`).
 #'
-#' @seealso [DB_XXXX_CONCORDANCE]
+#' @param ... positive whole numbers
+#' @param timeline character
 #'
-#' @examples
-#' # The constructors `RY()`, `PY()`, etc. all yield instances of a very simple "S3" class (`YYYY`).
-#' CY(2011:2014) %>% inherits("YYYY")
-#' PY(2011:2014) %>% as.character()
-#' BY(2011:2014) %>% as.integer()
-#' CY(2011:2014) %>% max()
+#' @references
+#' - [What's In a Year?](https://paper.dropbox.com/doc/Key-Concept-Whats-in-a-Year--BEm7K0si5VGV_nTugk5BHqo0Ag-p6bICw8OZNDcUazyCFULw)
 #'
 #' @export
-YYYY <- function (..., prefix) {
-  x <- c(...)
-  stopifnot(is.numeric(x))
-  x <- paste0(prefix, x)
-  x <- as_YYYY(x)
+new_YYYY <- function (..., timeline = c("CY", "RY", "PY", "BY")) {
+  timeline <- match.arg(timeline)
+  year <- c(...)
+  if (isFALSE(is.numeric(year)) || isTRUE(any(year != round(year)))) {
+    err_msg <- "Only positive whole-number years are supported."
+    stop(err_msg)
+  }
+  x <- structure(as.integer(year), class = "YYYY")
+  attr(x, "timeline") <- timeline
   return(x)
 }
 
-#' @param x `YYYY` object
-#'
-#' @noRd
+#' @describeIn YYYY Calendar year(s)
 #' @export
-as_YYYY <- function (x) {
-  x <- structure(x, class = "YYYY")
-  return(x)
+CY <- function (...) {
+  new_YYYY(..., timeline = "CY")
 }
 
-#'----------------------------------------------------------------------
-
-#' @param x `YYYY` object
-#' @param ... ignored
-#'
-#' @noRd
+#' @describeIn YYYY Reporting year(s)
 #' @export
-as.character.YYYY <- function (x, ...) {
-  unclass(x)
+RY <- function (...) {
+  new_YYYY(..., timeline = "RY")
 }
 
-#' @param x `YYYY` object
-#' @param ... ignored
-#'
-#' @noRd
+#' @describeIn YYYY Permit year(s)
 #' @export
-as.integer.YYYY <- function (x, ...) {
-  readr::parse_number(x, ...)
+PY <- function (...) {
+  new_YYYY(..., timeline = "PY")
 }
 
-#' @param x `YYYY` object
-#' @param tz character
-#' @param ... ignored
-#'
-#' @noRd
+#' @describeIn YYYY Base year(s)
 #' @export
-as.Date.YYYY <- function (x, ..., tz = "") {
-  datestamp <- stringr::str_c(as.integer(x), "-01-01")
-  as.Date(datestamp, tz = tz, ...)
-}
-
-#' @param x `YYYY` object
-#' @param tz character
-#' @param ... further arguments to [as.POSIXct()]
-#'
-#' @noRd
-#' @export
-as.POSIXct.YYYY <- function (x, tz = "", ...) {
-  dttm <- ISOdatetime(as.integer(x), 01, 01, 00, 00, 00, tz = tz)
-  as.POSIXct(dttm, tz = tz, ...)
-}
-
-#' @noRd
-#' @export
-as.double.YYYY <- function (x, ...) {
-  #dttm <- as.POSIXct(x, ...)
-  #as.double(dttm)
-  as.double(as.integer(x, ...))
-}
-
-#'----------------------------------------------------------------------
-
-#' @param e1 `YYYY` object
-#' @param e2 `YYYY` object
-#'
-#' @noRd
-`+.YYYY` <- function (e1, e2) {
-  stopifnot(is.numeric(e2))
-  cls <- dplyr::first(class(e1))
-  do.call(cls, list(x = as.integer(e1) + e2))
-}
-
-#' @param e1 `YYYY` object
-#' @param e2 `YYYY` object
-#'
-#' @noRd
-`-.YYYY` <- function (e1, e2) {
-  stopifnot(is.numeric(e2))
-  cls <- dplyr::first(class(e1))
-  do.call(cls, list(x = as.integer(e1) - e2))
-}
-
-#'----------------------------------------------------------------------
-
-#' @param x `YYYY` object
-#' @param ... ignored
-#'
-#' @noRd
-min.YYYY <- function (x, ...) {
-  values <- as.integer(x)
-  i <- which.min(values)
-  cls <- dplyr::first(class(x))
-  do.call(cls, list(x = values[i]))
-}
-
-#' @param x `YYYY` object
-#' @param ... ignored
-#'
-#' @noRd
-max.YYYY <- function (x, ...) {
-  values <- as.integer(x)
-  i <- which.max(values)
-  cls <- dplyr::first(class(x))
-  do.call(cls, list(x = values[i]))
-}
-
-#' @param x `YYYY` object
-#' @param ... ignored
-#'
-#' @noRd
-range.YYYY <- function (x, ...) {
-  values <- as.integer(x)
-  i <- c(which.min(values), which.max(values))
-  cls <- dplyr::first(class(x))
-  do.call(cls, list(x = values[i]))
-}
-
-#'----------------------------------------------------------------------
-
-#' @param x `YYYY` object
-#' @param ...
-#'
-#' @noRd
-print.YYYY <- function (x, ...) {
-  cat(as.character(x))
-}
-
-#'----------------------------------------------------------------------
-
-#' @param x `YYYY` object
-#' @param i integer
-#'
-#' @export
-`[.YYYY` <- function(x, i) {
-  as_YYYY(NextMethod())
-}
-
-#'----------------------------------------------------------------------
-
-#' @noRd
-vec_ptype_abbr.YYYY <- function (x, ...) {
-  "YYYY"
+BY <- function (...) {
+  new_YYYY(..., timeline = "BY")
 }

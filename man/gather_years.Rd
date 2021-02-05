@@ -23,15 +23,15 @@ gather_years(
 
 \item{pattern}{(regexp) gather columns matching this}
 
-\item{transform}{(formula or function) applied to resulting column using `mutate_at()`}
+\item{transform}{(formula or function) applied to resulting column using \code{mutate_at()}}
 
-\item{na.rm}{(logical) drop rows from output where value would be `NA`}
+\item{na.rm}{(logical) drop rows from output where value would be \code{NA}}
 
 \item{verbose}{(logical) display messages}
 }
 \value{
-tabular data with column `year`
+tabular data with column \code{year}
 }
 \description{
-Gather columns beginning with `CY`, `RY`, `PY`, as well as columns that look like "naive" four-digit years.
+Gather columns beginning with \code{CY}, \code{RY}, \code{PY}, as well as columns that look like "naive" four-digit years.
 }

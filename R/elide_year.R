@@ -1,9 +1,13 @@
 #' elide_year
 #'
 #' To elide distinctions between "CY", "BY", "RY", etc.
+#' Drops the timeline (that is, prefix) and returns a simple integer.
 #'
 #' @param x `RY`, `PY`, `CY`, or `BY` object
-#' @param verbose display messages
+#' @param verbose logical
+#'
+#' @importFrom stringr str_extract
+#' @import
 #'
 #' @export
 elide_year <- function (
@@ -11,20 +15,20 @@ elide_year <- function (
   verbose = getOption("verbose")
 ) {
 
-  msg <- function (...) if(isTRUE(verbose)) message("[elide_year] ", ...)
+  # msg <- function (...) if(isTRUE(verbose)) message("[elide_year] ", ...)
+  #
+  # x <- as.character(x)
+  #
+  # timelines <-
+  #   unique(
+  #     stringr::str_extract(
+  #       as.character(x),
+  #       "^[A-Z]Y"))
+  #
+  # if (isFALSE(all(is.na(timelines)))) {
+  #   msg("dropping timelines (that is, prefixes) from year")
+  # }
 
-  x <- as.character(x)
+  return(as.integer(x))
 
-  prefixes <-
-    unique(
-      stringr::str_extract(x, "^[A-Z]Y"))
-
-  if (isFALSE(funtools::all_true(is.na(prefixes)))) {
-    msg("dropping ", strtools::str_csv(prefixes), " from year")
-  }
-
-  parsed <-
-    parse_year(x)
-
-  return(parsed)
 }

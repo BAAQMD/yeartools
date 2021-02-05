@@ -14,7 +14,7 @@ expand_years(
 \arguments{
 \item{input_data}{tabular data}
 
-\item{years}{vector of class `YYYY` that you want to expand across}
+\item{years}{vector of class \code{YYYY} that you want to expand across}
 
 \item{year_var}{character}
 

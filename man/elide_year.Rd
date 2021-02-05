@@ -7,7 +7,7 @@
 elide_year(x, verbose = getOption("verbose"))
 }
 \arguments{
-\item{x}{`RY`, `PY`, `CY`, or `BY` object}
+\item{x}{\code{RY}, \code{PY}, \code{CY}, or \code{BY} object}
 
 \item{verbose}{display messages}
 }

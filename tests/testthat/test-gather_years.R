@@ -9,7 +9,7 @@ test_data <-
 expected_data <-
   tibble(
     cat_id = c(101, 101, 102, 102),
-    year = c("CY2011", "CY2012", "CY2011", "CY2012"),
+    year = CY(2011, 2012, 2011, 2012),
     ems_qty = c(345.6, 432, 23.1, 98))
 
 test_that("warn if missing `value_var` (then default to ems_qty)", {

@@ -17,8 +17,7 @@ gather_years <- function (
   input_data,
   value_var,
   year_var = "year",
-  pattern = "([A-Z]Y)?[[:digit:]]{4}",
-  transform = identity,
+  pattern = "([A-Z]Y)([[:digit:]]{4})",
   na.rm = TRUE,
   verbose = getOption("verbose")
 ) {
@@ -46,26 +45,44 @@ gather_years <- function (
 
   msg("gathering: ", strtools::str_csv(gather_vars))
 
-  gathered_data <-
+  tidied_data <-
     tidyr::gather(
       input_data,
       key = !!year_var,
       value = !!value_var,
       gather_vars)
 
-  # tidyr::pivot_longer(
-  #   input_data,
-  #   cols = gather_vars,
-  #   year_var = year_var,
-  #   value_var = !!value_var,
-  #   values_drop_na = na.rm)
+  #
+  # TODO: use `pivot_longer()` instead of `gather()`
+  #
+  # tidied_data <-
+  #   tidyr::pivot_longer(
+  #     input_data,
+  #     cols = gather_vars,
+  #     names_to = year_var,
+  #     values_to = !!value_var,
+  #     values_drop_na = na.rm)
 
-  transformed_data <-
-    mutate_at(
-      gathered_data,
-      vars(year_var),
-      transform) # defaults to `identity`
+  # Try to guess the timeline: if all prefixes are the same,
+  # then use that. If not, then leave it as character.
+  x <- pull(tidied_data, !!year_var)
+  match_list <- str_match_all(x, pattern)
+  timeline <- unique(map_chr(match_list, pluck, 2))
+  if (length(timeline) == 1) {
 
-  return(transformed_data)
+    msg("auto-detected timeline: ", timeline)
+    year <- as.integer(map_chr(match_list, pluck, 3))
+    msg("first 3 years are: ", strtools::str_csv(year))
+    x <- new_YYYY(year, timeline = timeline)
+    tidied_data <- mutate(tidied_data, !!year_var := x)
+
+  } else {
+
+    msg("timelines (that is, prefixes) are inconsistent (", str_csv(timeline))
+    msg("leaving year column (", year_var, ") as character")
+
+  }
+
+  return(tidied_data)
 
 }
