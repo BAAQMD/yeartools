@@ -1,21 +1,10 @@
 context("YYYY")
 
 test_that("RY alone", {
-
-  yrs <-
-    RY(2011:2014)
-
-  expect_true(
-    length(yrs) == 4)
-
-  expect_s3_class(
-    yrs,
-    c("RY", "YYYY"))
-
-  expect_equivalent(
-    as.character(yrs),
-    paste0("RY", 2011:2014))
-
+  x <- RY(2011:2014)
+  expect_equal(length(x), 4)
+  expect_is(x, c("YYYY", "vctrs_rcrd", "vctrs_vctr"))
+  expect_equivalent(as.character(x), paste0("RY", 2011:2014))
 })
 
 test_that("RY in tibble", {

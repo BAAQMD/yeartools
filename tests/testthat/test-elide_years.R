@@ -1,4 +1,4 @@
-context("elide_years")
+library(magrittr)
 
 test_that("S3 method: default", {
 
