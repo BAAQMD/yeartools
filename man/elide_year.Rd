@@ -9,8 +9,9 @@ elide_year(x, verbose = getOption("verbose"))
 \arguments{
 \item{x}{\code{RY}, \code{PY}, \code{CY}, or \code{BY} object}
 
-\item{verbose}{display messages}
+\item{verbose}{logical}
 }
 \description{
 To elide distinctions between "CY", "BY", "RY", etc.
+Drops the timeline (that is, prefix) and returns a simple integer.
 }

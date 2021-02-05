@@ -8,8 +8,7 @@ gather_years(
   input_data,
   value_var,
   year_var = "year",
-  pattern = "([A-Z]Y)?[[:digit:]]{4}",
-  transform = identity,
+  pattern = "([A-Z]Y)([[:digit:]]{4})",
   na.rm = TRUE,
   verbose = getOption("verbose")
 )
@@ -23,11 +22,11 @@ gather_years(
 
 \item{pattern}{(regexp) gather columns matching this}
 
-\item{transform}{(formula or function) applied to resulting column using \code{mutate_at()}}
-
 \item{na.rm}{(logical) drop rows from output where value would be \code{NA}}
 
 \item{verbose}{(logical) display messages}
+
+\item{transform}{(formula or function) applied to resulting column using \code{mutate_at()}}
 }
 \value{
 tabular data with column \code{year}
