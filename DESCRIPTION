@@ -25,7 +25,6 @@ Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Collate: 
     'YYYY.R'
-    'YYYY-arith.R'
     'YYYY-format.R'
     'YYYY-index.R'
     'YYYY-range.R'
