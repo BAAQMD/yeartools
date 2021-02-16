@@ -10,6 +10,8 @@ format.YYYY <- function (x, ...) {
 #' @param x `YYYY` object
 #' @param ...
 #' @noRd
+#'
+#' @export
 print.YYYY <- function (x, ...) {
   x <- as.character(x)
   NextMethod()
