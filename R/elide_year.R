@@ -7,7 +7,6 @@
 #' @param verbose logical
 #'
 #' @importFrom stringr str_extract
-#' @import
 #'
 #' @export
 elide_year <- function (
