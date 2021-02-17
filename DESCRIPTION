@@ -6,7 +6,7 @@ Author: David Holstius
 Maintainer: David Holstius <dholstius@baaqmd.gov>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: MIT
 Depends:
   vctrs
 Reverse-Depends:
@@ -14,10 +14,26 @@ Reverse-Depends:
   inventory
 Suggests:
   tibble,
-  dplyr,
   testthat (>= 2.1.0),
   knitr,
-  stringr
+  tidyverse
+Imports:
+  vartools,
+  funtools,
+  strtools,
+  dplyr,
+  lubridate,
+  purrr,
+  rlang,
+  stringr,
+  tidyr,
+  tidyselect,
+  magrittr,
+  methods, readr
+Remotes:
+  github::BAAQMD/vartools,
+  github::BAAQMD/funtools,
+  github::BAAQMD/strtools
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1

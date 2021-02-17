@@ -11,7 +11,7 @@
 #' @seealso [RY()] [PY()]
 #'
 #' @examples
-#' input_data <- tibble(year = c("RY(2007:2009)", "RY(2001)", "PY(2003)"), ems_qty = c(111, 22, 45))
+#' input_data <- data.frame(year = c("RY(2007:2009)", "RY(2001)"), ems_qty = c(111, 22))
 #' unpack_years(input_data, year_var = "year")
 #' unpack_years(input_data)
 #'
@@ -19,6 +19,7 @@
 #' @importFrom stringr str_remove_all
 #' @importFrom tidyr extract unnest
 #' @importFrom dplyr mutate_at mutate
+#' @importFrom strtools parse_integers
 #'
 #' @export
 unpack_years <- function (

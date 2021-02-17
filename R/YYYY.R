@@ -8,11 +8,17 @@
 #'
 #' The constructors `RY()`, `PY()`, etc. all yield instances of a very simple "S3" class (`YYYY`).
 #'
-#' @param ... positive whole numbers
-#' @param timeline character
-#'
 #' @references
 #' - [What's In a Year?](https://paper.dropbox.com/doc/Key-Concept-Whats-in-a-Year--BEm7K0si5VGV_nTugk5BHqo0Ag-p6bICw8OZNDcUazyCFULw)
+#'
+NULL
+
+#' new_YYYY
+#'
+#' @rdname YYYY
+#'
+#' @param ... positive whole numbers
+#' @param timeline character
 #'
 #' @export
 new_YYYY <- function (..., timeline = c("CY", "RY", "PY", "BY")) {

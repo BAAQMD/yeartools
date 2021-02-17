@@ -20,7 +20,7 @@ Unpack a vector of "packed years" (like RY or PY) inside a tibble
 Might be slow and need optimization
 }
 \examples{
-input_data <- tibble(year = c("RY(2007:2009)", "RY(2001)", "PY(2003)"), ems_qty = c(111, 22, 45))
+input_data <- data.frame(year = c("RY(2007:2009)", "RY(2001)"), ems_qty = c(111, 22))
 unpack_years(input_data, year_var = "year")
 unpack_years(input_data)
 

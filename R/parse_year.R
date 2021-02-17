@@ -19,6 +19,7 @@ parse_year <- function (x, ...) {
 }
 
 #' @method parse_year character
+#' @importFrom readr parse_number
 #' @export
 parse_year.character <- function (x, ...) {
   parsed <- as.integer(readr::parse_number(x))

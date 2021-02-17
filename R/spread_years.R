@@ -4,8 +4,7 @@
 #'
 #' @param input_data (tabular data)
 #' @param value_var (character or symbol) defaults to whatever is returned by [find_qty_var()].
-#' @param key_var (character) defaults to whatever is found by [find_year_var()].
-#' @param transform (formula or function) applied to resulting column using `mutate_at()`
+#' @param year_var (character) defaults to whatever is found by [find_year_var()].
 #' @param ... (dots) passed to [tidyr::spread()]
 #' @param verbose (logical) display messages
 #'

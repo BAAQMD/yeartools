@@ -25,8 +25,6 @@ gather_years(
 \item{na.rm}{(logical) drop rows from output where value would be \code{NA}}
 
 \item{verbose}{(logical) display messages}
-
-\item{transform}{(formula or function) applied to resulting column using \code{mutate_at()}}
 }
 \value{
 tabular data with column \code{year}

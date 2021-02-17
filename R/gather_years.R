@@ -6,9 +6,14 @@
 #' @param value_var (character or symbol) defaults to "ems_qty"
 #' @param pattern (regexp) gather columns matching this
 #' @param year_var (character)
-#' @param transform (formula or function) applied to resulting column using `mutate_at()`
 #' @param na.rm (logical) drop rows from output where value would be `NA`
 #' @param verbose (logical) display messages
+#'
+#' @importFrom dplyr pull
+#' @importFrom rlang as_name `:=`
+#' @importFrom purrr map_chr pluck
+#' @importFrom strtools str_csv
+#' @importFrom stringr str_match_all
 #'
 #' @return tabular data with column `year`
 #' @export
@@ -65,8 +70,8 @@ gather_years <- function (
 
   # Try to guess the timeline: if all prefixes are the same,
   # then use that. If not, then leave it as character.
-  x <- pull(tidied_data, !!year_var)
-  match_list <- str_match_all(x, pattern)
+  x <- dplyr::pull(tidied_data, !!year_var)
+  match_list <- stringr::str_match_all(x, pattern)
   timeline <- unique(map_chr(match_list, pluck, 2))
   if (length(timeline) == 1) {
 

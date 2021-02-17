@@ -1,3 +1,9 @@
+#' timeline
+#'
+#' Get the timeline ("CY", "RY", etc.) of a `YYYY` object.
+#'
+#' @param x [YYYY] object
+#'
 #' @export
 timeline <- function (x) {
   UseMethod("timeline")
