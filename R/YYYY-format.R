@@ -8,7 +8,7 @@ format.YYYY <- function (x, ...) {
 }
 
 #' @param x `YYYY` object
-#' @param ...
+#' @param ... ignored
 #' @noRd
 #'
 #' @export

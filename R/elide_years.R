@@ -5,7 +5,7 @@
 #' @param x `CY`, `BY`, `RY`, or `PY` object
 #' @param ... futher arguments
 #'
-#' @importfrom tidyselect all_of
+#' @importFrom tidyselect all_of
 #'
 #' @export
 elide_years <- function (x, ...) {

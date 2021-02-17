@@ -8,7 +8,7 @@
 #' @importFrom dplyr vars
 #' @importFrom funtools `%not_in%`
 #' @importFrom tidyr chop unchop
-#' @importfrom tidyselect all_of
+#' @importFrom tidyselect all_of
 #' @importFrom dplyr mutate_at select
 #' @importFrom purrr map
 #'
