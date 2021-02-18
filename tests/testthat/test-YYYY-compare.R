@@ -33,4 +33,8 @@ test_that("ordering works", {
   expect_true(CY(2011) >= "CY2011")
   expect_true("CY2011" >= CY(2011))
 
+  expect_true(CY(2012) >= CY(2011))
+  expect_true(CY(2012) >= "CY2011")
+  expect_true("CY2012" >= CY(2011))
+
 })
