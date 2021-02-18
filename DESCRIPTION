@@ -1,7 +1,7 @@
 Package: yeartools
 Type: Package
 Title: Provides CY, RY, PY, and BY classes and methods
-Version: 2021.02.16
+Version: 2021.02.18
 Author: David Holstius
 Maintainer: David Holstius <dholstius@baaqmd.gov>
 Description: More about what it does (maybe more than one line)
@@ -42,6 +42,7 @@ VignetteBuilder: knitr
 Collate: 
     'YYYY.R'
     'YYYY-arith.R'
+    'YYYY-compare.R'
     'YYYY-format.R'
     'YYYY-index.R'
     'YYYY-range.R'
