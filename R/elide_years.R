@@ -27,10 +27,9 @@ elide_years.data.frame <- function (x, ...) {
   if ("year" %in% names(x)) {
 
     result <-
-      dplyr::mutate_at(
+      dplyr::mutate(
         x,
-        vars(all_of("year")),
-        ~ elide_year(., ...))
+        year = elide_year(year, ...))
 
   } else {
 

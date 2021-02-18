@@ -11,6 +11,7 @@
 #' @export
 elide_year <- function (
   x,
+  pattern = "([CRPB]Y)?([0-9]{4})",
   verbose = getOption("verbose")
 ) {
 
@@ -28,6 +29,19 @@ elide_year <- function (
   #   msg("dropping timelines (that is, prefixes) from year")
   # }
 
-  return(as.integer(x))
+  if (inherits(x, "YYYY")) {
+
+    return(as.integer(x))
+
+  } else if (is.numeric(x)) {
+
+    return(as.integer(round(x, digits = 0)))
+
+  } else {
+
+    matches <- stringr::str_match(as.character(x), pattern)
+    return(as.integer(matches[, 3]))
+
+  }
 
 }
