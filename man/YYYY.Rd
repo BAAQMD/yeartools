@@ -11,7 +11,11 @@
 \alias{+.YYYY}
 \title{Years with explicit timelines}
 \usage{
-new_YYYY(..., timeline = c("CY", "RY", "PY", "BY"))
+new_YYYY(
+  ...,
+  timeline = c("CY", "RY", "PY", "BY"),
+  pattern = "^([CRPB]Y)([0-9]{4})$"
+)
 
 CY(...)
 

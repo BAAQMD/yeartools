@@ -3,5 +3,7 @@
 #' @noRd
 #' @export
 `[.YYYY` <- function(x, i) {
-  new_YYYY(NextMethod(), timeline = timeline(x))
+  timeline <- timeline(x)
+  x <- as.integer(x)
+  new_YYYY(NextMethod(), timeline = timeline)
 }

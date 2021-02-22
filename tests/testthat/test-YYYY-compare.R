@@ -15,6 +15,12 @@ test_that("equality works", {
 
 })
 
+test_that("different timelines are not comparable", {
+
+  expect_false(RY(2011) == PY(2011))
+
+})
+
 test_that("ordering works", {
 
   expect_true(CY(2011) < CY(2012))

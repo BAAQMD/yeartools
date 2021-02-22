@@ -16,4 +16,17 @@ test_that("constructor works", {
   x <- new_YYYY(2003, 2004:2009, timeline = "CY")
   expect_is(x, "YYYY")
 
+  # character (all with same prefix)
+  x <- new_YYYY(c("CY1990", "CY2000"))
+  expect_is(x, "YYYY")
+  expect_identical(timeline(x), "CY")
+
+})
+
+test_that("constructor fails appropriately", {
+
+  # character (inconsistent prefixes)
+  expect_error(
+    x <- new_YYYY(c("RY2011", "PY2011")))
+
 })

@@ -4,7 +4,8 @@
 #' @noRd
 #' @export
 format.YYYY <- function (x, ...) {
-  sprintf("%s%d", timeline(x), x)
+  attr(x, "timeline") <- NULL
+  return(unclass(x))
 }
 
 #' @param x `YYYY` object

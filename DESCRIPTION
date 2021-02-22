@@ -8,7 +8,8 @@ Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT
 Depends:
-  vctrs
+    vctrs,
+    R (>= 2.10)
 Reverse-Depends:
   DataBank,
   inventory

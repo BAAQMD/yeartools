@@ -4,7 +4,11 @@
 \alias{elide_year}
 \title{elide_year}
 \usage{
-elide_year(x, pattern = "([CRPB]Y)?([0-9]{4})", verbose = getOption("verbose"))
+elide_year(
+  x,
+  pattern = "^([CRPB]Y)?([0-9]{4})$",
+  verbose = getOption("verbose")
+)
 }
 \arguments{
 \item{x}{\code{RY}, \code{PY}, \code{CY}, or \code{BY} object}

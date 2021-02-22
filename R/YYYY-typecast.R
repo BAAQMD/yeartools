@@ -2,13 +2,15 @@
 #' @noRd
 #' @export
 as.character.YYYY <- function (x, ...) {
-  format(x, ...)
+  #format(x, ...)
+  attr(x, "timeline") <- NULL
+  unclass(x)
 }
 
 #' @noRd
 #' @export
 as.integer.YYYY <- function (x, ...) {
-  as.integer(unclass(x))
+  as.integer(str_remove(as.character(x), timeline(x)))
 }
 
 #' @param x `YYYY` object

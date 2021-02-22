@@ -21,16 +21,36 @@ NULL
 #' @param timeline character
 #'
 #' @export
-new_YYYY <- function (..., timeline = c("CY", "RY", "PY", "BY")) {
-  timeline <- match.arg(timeline)
-  year <- c(...)
+new_YYYY <- function (
+  ...,
+  timeline = c("CY", "RY", "PY", "BY"),
+  pattern = "^([CRPB]Y)([0-9]{4})$"
+) {
+
+  if (missing(timeline)) {
+    x <- c(...)
+    matches <- stringr::str_match(as.character(x), pattern)
+    timeline <- unique(matches[, 2])
+    stopifnot(length(timeline) == 1)
+    year <- matches[, 3]
+  } else {
+    timeline <- match.arg(timeline)
+    year <- c(...)
+  }
+
+  year <- as.integer(year)
+
   if (isFALSE(is.numeric(year)) || isTRUE(any(year != round(year)))) {
     err_msg <- "Only positive whole-number years are supported."
     stop(err_msg)
   }
-  x <- structure(as.integer(year), class = "YYYY")
+
+  x <- paste0(timeline, year)
+  class(x) <- c("YYYY", "character")
+
   attr(x, "timeline") <- timeline
   return(x)
+
 }
 
 #' @describeIn YYYY Calendar year(s)

@@ -11,7 +11,7 @@
 #' @export
 elide_year <- function (
   x,
-  pattern = "([CRPB]Y)?([0-9]{4})",
+  pattern = "^([CRPB]Y)?([0-9]{4})$",
   verbose = getOption("verbose")
 ) {
 
