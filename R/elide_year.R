@@ -5,26 +5,15 @@
 #' @param x `RY`, `PY`, `CY`, or `BY` object
 #' @param verbose display messages
 #'
+#' @importFrom stringr str_match
+#'
 #' @export
 elide_year <- function (
   x,
+  pattern = "^([CRPB]Y)?([0-9]{4})$",
   verbose = getOption("verbose")
 ) {
-
-  msg <- function (...) if(isTRUE(verbose)) message("[elide_year] ", ...)
-
-  x <- as.character(x)
-
-  prefixes <-
-    unique(
-      stringr::str_extract(x, "^[A-Z]Y"))
-
-  if (isFALSE(funtools::all_true(is.na(prefixes)))) {
-    msg("dropping ", strtools::str_csv(prefixes), " from year")
-  }
-
-  parsed <-
-    parse_year(x)
-
-  return(parsed)
+  matches <- stringr::str_match(as.character(x), pattern = pattern)
+  year <- as.integer(matches[, ncol(matches)])
+  return(year)
 }

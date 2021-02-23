@@ -1,7 +1,7 @@
 > print(CY_data)
 # A tibble: 6 x 1
-    year
-    <CY>
+  year  
+  <YYYY>
 1 CY2010
 2 CY2011
 3 CY2012

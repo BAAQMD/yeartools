@@ -8,8 +8,6 @@ Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
 Depends:
-  vctrs (>= 0.3.6),
-  pillar,
   dplyr,
   purrr
 Reverse-Depends:
@@ -36,18 +34,3 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
-Collate: 
-  'YYYY.R'
-  'BY.R'
-  'CY.R'
-  'PY.R'
-  'RY.R'
-  'elide_year.R'
-  'elide_years.R'
-  'expand_years.R'
-  'gather_years.R'
-  'ndays_in.R'
-  'parse_year.R'
-  'spread_years.R'
-  'unpack_years.R'
-  'yeartools-package.R'

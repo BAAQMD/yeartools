@@ -1,4 +1,4 @@
 #' @export
 year.YYYY <- function (x) {
-  return(as.integer(x))
+  return(elide_year(x))
 }

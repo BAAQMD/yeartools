@@ -20,24 +20,40 @@ new_YYYY <- function (
     stopifnot(length(timeline) == 1)
   }
 
-  rcrd <- new_rcrd(list(year = year), class = "YYYY")
-  attr(rcrd, "timeline") <- timeline
-  return(rcrd)
+  result <- paste0(timeline, year)
+  class(result) <- c("YYYY", "character")
+  return(result)
 
 }
 
+#' @export
+#' @noRd
 RY <- function (x, ...) {
-  new_YYYY(x, ..., timeline = "RY")
+  x <- c(x, ...)
+  stopifnot(all(stringr::str_detect(x, "^[0-9]{4}$")))
+  new_YYYY(x, timeline = "RY")
 }
 
+#' @export
+#' @noRd
 PY <- function (x, ...) {
-  new_YYYY(x, ..., timeline = "PY")
+  x <- c(x, ...)
+  stopifnot(all(stringr::str_detect(x, "^[0-9]{4}$")))
+  new_YYYY(x, timeline = "PY")
 }
 
+#' @export
+#' @noRd
 BY <- function (x, ...) {
-  new_YYYY(x, ..., timeline = "BY")
+  x <- c(x, ...)
+  stopifnot(all(stringr::str_detect(x, "^[0-9]{4}$")))
+  new_YYYY(x, timeline = "BY")
 }
 
+#' @export
+#' @noRd
 CY <- function (x, ...) {
-  new_YYYY(x, ..., timeline = "CY")
+  x <- c(x, ...)
+  stopifnot(all(stringr::str_detect(x, "^[0-9]{4}$")))
+  new_YYYY(x, timeline = "CY")
 }

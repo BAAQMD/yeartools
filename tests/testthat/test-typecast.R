@@ -10,8 +10,6 @@ test_that("as.character() works", {
 
 test_that("as.integer() gives warning", {
 
-  expect_warning(
-    as.integer(x),
-    "elide_year")
+  expect_warning(as.integer(x))
 
 })
