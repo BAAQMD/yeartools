@@ -8,16 +8,16 @@ Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT
 Depends:
-    vctrs,
-    R (>= 2.10)
+  dplyr,
+  purrr
 Reverse-Depends:
   DataBank,
   inventory
 Suggests:
-  tibble,
+  lazyeval,
   testthat (>= 2.1.0),
-  knitr,
-  tidyverse
+  tidyverse,
+  magrittr
 Imports:
   vartools,
   funtools,
@@ -27,35 +27,15 @@ Imports:
   purrr,
   rlang,
   stringr,
-  tidyr,
-  tidyselect,
-  magrittr,
-  methods, readr
-Remotes:
-  github::BAAQMD/vartools,
-  github::BAAQMD/funtools,
-  github::BAAQMD/strtools
+  lubridate,
+  pillar,
+  funtools,
+  vartools,
+  tibble,
+  methods,
+  readr,
+  strtools,
+  vctrs
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
-Roxygen: list(markdown = TRUE)
-VignetteBuilder: knitr
-Collate: 
-    'YYYY.R'
-    'YYYY-arith.R'
-    'YYYY-compare.R'
-    'YYYY-format.R'
-    'YYYY-index.R'
-    'YYYY-range.R'
-    'YYYY-timeline.R'
-    'YYYY-typecast.R'
-    'YYYY-vctrs.R'
-    'elide_year.R'
-    'elide_years.R'
-    'expand_years.R'
-    'gather_years.R'
-    'ndays_in.R'
-    'parse_year.R'
-    'spread_years.R'
-    'unpack_years.R'
-    'yeartools-package.R'

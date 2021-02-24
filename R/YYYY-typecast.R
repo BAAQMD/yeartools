@@ -2,15 +2,17 @@
 #' @noRd
 #' @export
 as.character.YYYY <- function (x, ...) {
-  #format(x, ...)
-  attr(x, "timeline") <- NULL
+  #prefix <- timeline(x)
+  #paste0(prefix, field(x, "year"))
   unclass(x)
 }
 
 #' @noRd
 #' @export
 as.integer.YYYY <- function (x, ...) {
-  as.integer(str_remove(as.character(x), timeline(x)))
+  warning("use elide_year(x) instead of as.integer(x)")
+  #field(x, "year")
+  year(x)
 }
 
 #' @param x `YYYY` object
@@ -20,7 +22,7 @@ as.integer.YYYY <- function (x, ...) {
 #' @noRd
 #' @export
 as.Date.YYYY <- function (x, ..., tz = "") {
-  datestamp <- paste0(as.integer(x), "-01-01")
+  datestamp <- paste0(elide_year(x), "-01-01")
   as.Date(datestamp, tz = tz, ...)
 }
 
@@ -31,7 +33,7 @@ as.Date.YYYY <- function (x, ..., tz = "") {
 #' @noRd
 #' @export
 as.POSIXct.YYYY <- function (x, tz = "", ...) {
-  dttm <- ISOdatetime(as.integer(x), 01, 01, 00, 00, 00, tz = tz)
+  dttm <- ISOdatetime(elide_year(x), 01, 01, 00, 00, 00, tz = tz)
   as.POSIXct(dttm, tz = tz, ...)
 }
 
@@ -39,5 +41,5 @@ as.POSIXct.YYYY <- function (x, tz = "", ...) {
 #' @noRd
 #' @export
 as.double.YYYY <- function (x, ...) {
-  as.double(as.integer(x, ...))
+  as.double(elide_year(x, ...))
 }

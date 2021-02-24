@@ -5,8 +5,6 @@
 #' @param x `CY`, `BY`, `RY`, or `PY` object
 #' @param ... futher arguments
 #'
-#' @importFrom tidyselect all_of
-#'
 #' @export
 elide_years <- function (x, ...) {
   UseMethod("elide_years")
@@ -23,21 +21,11 @@ elide_years.default <- function (x, ...) {
 #' @method elide_years data.frame
 #' @export
 elide_years.data.frame <- function (x, ...) {
-
   if ("year" %in% names(x)) {
-
-    result <-
-      dplyr::mutate(
-        x,
-        year = elide_year(year, ...))
-
+    result <- dplyr::mutate(x, year = elide_year(as.character(year)))
   } else {
-
     # FIXME: issue a soft warning?
     result <- x
-
   }
-
   return(result)
-
 }
