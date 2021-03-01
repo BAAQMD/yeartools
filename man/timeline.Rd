@@ -7,8 +7,8 @@
 timeline(x)
 }
 \arguments{
-\item{x}{\link{YYYY} object}
+\item{x}{[YYYY] object}
 }
 \description{
-Get the timeline ("CY", "RY", etc.) of a \code{YYYY} object.
+Get the timeline ("CY", "RY", etc.) of a `YYYY` object.
 }

@@ -13,7 +13,7 @@ elide_years(x, ...)
 \method{elide_years}{data.frame}(x, ...)
 }
 \arguments{
-\item{x}{\code{CY}, \code{BY}, \code{RY}, or \code{PY} object}
+\item{x}{`CY`, `BY`, `RY`, or `PY` object}
 
 \item{...}{futher arguments}
 }
