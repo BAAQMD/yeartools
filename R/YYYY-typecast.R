@@ -2,17 +2,14 @@
 #' @noRd
 #' @export
 as.character.YYYY <- function (x, ...) {
-  #prefix <- timeline(x)
-  #paste0(prefix, field(x, "year"))
-  unclass(x)
+  format(x)
 }
 
 #' @noRd
 #' @export
 as.integer.YYYY <- function (x, ...) {
   warning("use elide_year(x) instead of as.integer(x)")
-  #field(x, "year")
-  year(x)
+  elide_year(x)
 }
 
 #' @param x `YYYY` object

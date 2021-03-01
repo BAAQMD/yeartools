@@ -13,3 +13,4 @@ test_that("as.integer() gives warning", {
   expect_warning(as.integer(x))
 
 })
+
