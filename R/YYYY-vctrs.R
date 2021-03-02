@@ -6,7 +6,7 @@ vec_ptype_abbr.YYYY <- function (x, ...) {
 
 #' @export
 #' @noRd
-vec_ptype2.YYYY.YYYY <- function (x, y) new_YYYY()
+vec_ptype2.YYYY.YYYY <- function (x, y, ...) new_YYYY()
 
 #' @export
 #' @noRd
@@ -22,7 +22,7 @@ vec_cast.YYYY.YYYY <- function (x, to, ...) x
 
 #' @export
 #' @noRd
-vec_cast.YYYY.character <- function (x, to, ...) YYYY(x)
+vec_cast.YYYY.character <- function (x, to, ...) YYYY(x, timeline = attr(x, "timeline"))
 
 #' @export
 #' @noRd
