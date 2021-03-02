@@ -78,7 +78,7 @@ gather_years <- function (
     msg("auto-detected timeline: ", timeline)
     year <- as.integer(map_chr(match_list, pluck, 3))
     msg("first 3 years are: ", strtools::str_csv(year))
-    x <- new_YYYY(year, timeline = timeline)
+    x <- YYYY(year, timeline = timeline)
     tidied_data <- mutate(tidied_data, !!year_var := x)
 
   } else {

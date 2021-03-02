@@ -4,7 +4,7 @@
 \alias{timeline}
 \title{timeline}
 \usage{
-timeline(x)
+timeline(x, pattern = "^([CRPB]Y)?([0-9]{4})$")
 }
 \arguments{
 \item{x}{[YYYY] object}

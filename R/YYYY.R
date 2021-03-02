@@ -3,22 +3,31 @@ library(tidyverse)
 
 new_YYYY <- function (
   x = character(),
-  timeline = NULL
+  timeline,
+  verbose = TRUE
 ) {
+
+  vec_assert(x, ptype = character())
+  vec_assert(timeline, ptype = character())
+
+  msg <- function (...) if(isTRUE(verbose)) message("[new_YYYY] ", ...)
+  stopifnot(all(str_detect(x, "^[0-9]{4}$")))
+
   result <- vctrs::new_vctr(x, timeline = timeline, class = c("YYYY", "character"))
+  #msg("timeline(result) is: ", timeline(result))
+
   return(result)
+
 }
 
 #' Typically we should call `YYYY()` rather than `new_YYYY()`.
-#'
-#'
 #'
 #' @export
 #' @noRd
 YYYY <- function(
   x = character(),
   ...,
-  timeline = NULL,
+  prefix = NULL,
   pattern = "^([CRPB]Y)?([0-9]{4})$",
   verbose = TRUE
 ) {
@@ -31,7 +40,7 @@ YYYY <- function(
   # don't bother trying to get fancy by parsing `x`.
   if (length(x) == 0) {
     msg("x is empty; short-circuiting")
-    result <- new_YYYY(x, timeline = timeline, class = c("YYYY", "character"))
+    result <- new_YYYY(x, timeline = prefix)
     return(result)
   }
 
@@ -48,46 +57,48 @@ YYYY <- function(
   # When the timelines are identical, we just return `x` unchanged.
   if (inherits(x, "YYYY")) {
     msg("x is a YYYY object")
-    if (timeline == attr(x, "timeline")) {
+    if (prefix == timeline(x)) {
       return(x) # nothing to do
     } else {
-      err_msg <- paste0("can't automatically align ", attr(x, "timeline"), " with ", timeline)
+      err_msg <- paste0("can't automatically align ", timeline(x), " with ", prefix)
       stop(err_msg)
     }
   }
 
   # If we got here, then `x` should be a character vector.
   # Now, we split `x` into two parts: `prefix` and `years`.
-  # `prefix` might be nonexistent, which is OK so long as `timeline` was supplied.
+  # `prefix` might be nonexistent, which is OK so long as `prefix` was supplied.
   stopifnot(is.character(x))
   matches <- stringr::str_match(x, pattern)
-  prefix <- unique(na.omit(matches[, 2]))
   years <- matches[, 3]
 
-  # If an explicit `timeline` was supplied, then we'll use that.
-  if (isFALSE(is.null(timeline))) {
-    msg("timeline explicitly supplied: ", timeline)
-    # The `timeline` argument takes precedence over any prefix(es) embedded in `x`,
+  # If an explicit `prefix` was supplied, then we'll use that.
+  if (isFALSE(is.null(prefix))) {
+    msg("prefix explicitly supplied: ", prefix)
+    # The `prefix` argument takes precedence over any prefix(es) embedded in `x`,
     # so let's warn the user, as a courtesy, if the
     if (length(prefix) > 0) {
-      if (all(prefix == timeline)) {
+      if (all(prefix == timeline(x))) {
         # pass; this is OK
       } else {
-        warning("both a timeline and some (non-matching) prefix(es) were supplied; ignoring prefix(es)")
+        warning("a `prefix` argument was supplied, but also `x` has some valid prefix(es); ignoring prefix(es) in `x`")
       }
     }
-    result <- new_YYYY(years, timeline = timeline)
-    return(result)
   }
 
-  if (isTRUE(is.null(timeline))) {
-    msg("timeline not supplied; prefix is: ", prefix)
-    if (length(prefix) > 0) {
-      stop("more than one unique prefix is present in x")
+  if (isTRUE(is.null(prefix))) {
+    prefixes <- unique(matches[, 2])
+    msg("prefix not supplied; detected prefixes are: ", prefixes)
+    if (length(prefixes) > 1) {
+      stop("more than one unique prefix was detected in x")
+    } else {
+      prefix <- prefixes
     }
-    result <- new_YYYY(years, timeline = prefix)
-    return(result)
   }
+
+  result <- new_YYYY(x = years, timeline = prefix)
+  msg("timeline(result) is: ", timeline(result))
+  return(result)
 
   stop("shouldn't get here")
 
@@ -96,23 +107,23 @@ YYYY <- function(
 #' @export
 #' @noRd
 RY <- function (x = character(), ...) {
-  YYYY(x, ..., timeline = "RY")
+  YYYY(x, ..., prefix = "RY")
 }
 
 #' @export
 #' @noRd
 PY <- function (x = character(), ...) {
-  YYYY(x, ..., timeline = "PY")
+  YYYY(x, ..., prefix = "PY")
 }
 
 #' @export
 #' @noRd
 BY <- function (x = character(), ...) {
-  YYYY(x, ..., timeline = "BY")
+  YYYY(x, ..., prefix = "BY")
 }
 
 #' @export
 #' @noRd
 CY <- function (x = character(), ...) {
-  YYYY(x, ..., timeline = "CY")
+  YYYY(x, ..., prefix = "CY")
 }

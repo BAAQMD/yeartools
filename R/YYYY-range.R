@@ -3,7 +3,7 @@
 #' @noRd
 min.YYYY <- function (x, na.rm = FALSE) {
   min_value <- min(elide_year(x), na.rm = na.rm)
-  new_YYYY(min_value, timeline = timeline(x))
+  YYYY(min_value, timeline = timeline(x))
 }
 
 #' @param x `YYYY` object
@@ -11,7 +11,7 @@ min.YYYY <- function (x, na.rm = FALSE) {
 #' @noRd
 max.YYYY <- function (x, na.rm = FALSE) {
   max_value <- max(elide_year(x), na.rm = na.rm)
-  new_YYYY(max_value, timeline = timeline(x))
+  YYYY(max_value, timeline = timeline(x))
 }
 
 #' @param x `YYYY` object
@@ -20,5 +20,5 @@ max.YYYY <- function (x, na.rm = FALSE) {
 #' @noRd
 range.YYYY <- function (x, na.rm = na.rm) {
   value_range <- range(elide_year(x), na.rm = na.rm)
-  new_YYYY(value_range, timeline = timeline(x))
+  YYYY(value_range, timeline = timeline(x))
 }

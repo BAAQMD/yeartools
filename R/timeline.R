@@ -1,8 +1,21 @@
-timeline <- function (x) {
-  return(attr(x, "timeline"))
-  # YYYY_PATTERN <- "^([CRPB]Y)?([0-9]{4})$"
-  # matches <- stringr::str_match(x, pattern = YYYY_PATTERN)
-  # timeline <- unique(matches[, 2])
-  # stopifnot(length(timeline) == 1)
-  # return(timeline)
+timeline <- function (
+  x,
+  pattern = "^([CRPB]Y)?([0-9]{4})$"
+) {
+
+  if (isFALSE(is.null(attr(x, "timeline")))) {
+    return(attr(x, "timeline"))
+  }
+
+  matches <- stringr::str_match(x, pattern)
+  prefix <- unique(na.omit(matches[, 2]))
+
+  if (length(prefix) == 1) {
+    return(prefix)
+  } else if (length(prefix) > 1) {
+    stop("must have only one unique prefix")
+  }
+
+  return(NULL)
+
 }
