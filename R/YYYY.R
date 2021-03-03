@@ -42,7 +42,7 @@ YYYY <- function(
   ...,
   prefix = NULL,
   pattern = "^([CRPB]Y)?([0-9]{4})$",
-  verbose = TRUE
+  verbose = getOption("verbose", default = FALSE)
 ) {
 
   msg <- function (...) if(isTRUE(verbose)) message("[YYYY] ", ...)
@@ -52,14 +52,12 @@ YYYY <- function(
   # For a zero-length `x`, just short-circuit and invoke `new_YYYY()`;
   # don't bother trying to get fancy by parsing `x`.
   if (length(x) == 0) {
-    msg("x is empty; short-circuiting")
     result <- new_YYYY(x, timeline = prefix)
     return(result)
   }
 
   # If we got a numeric `x`, just cast it to character, and then keep going.
   if (is.numeric(x)) {
-    msg("x is numeric; converting to character")
     stopifnot(all(x == round(x)))
     x <- as.character(as.integer(x))
   }
@@ -73,7 +71,7 @@ YYYY <- function(
     if (prefix == timeline(x)) {
       return(x) # nothing to do
     } else {
-      err_msg <- paste0("can't automatically align ", timeline(x), " with ", prefix)
+      err_msg <- paste0("[YYYY] can't automatically align ", timeline(x), " with ", prefix)
       stop(err_msg)
     }
   }
@@ -87,33 +85,29 @@ YYYY <- function(
 
   # If an explicit `prefix` was supplied, then we'll use that.
   if (isFALSE(is.null(prefix))) {
-    msg("prefix explicitly supplied: ", prefix)
     # The `prefix` argument takes precedence over any prefix(es) embedded in `x`,
     # so let's warn the user, as a courtesy, if the
     if (length(prefix) > 0) {
       if (all(prefix == timeline(x))) {
         # pass; this is OK
       } else {
-        warning("a `prefix` argument was supplied, but also `x` has some valid prefix(es); ignoring prefix(es) in `x`")
+        warning("[YYYY] a `prefix` argument was supplied, but also `x` has some valid prefix(es); ignoring prefix(es) in `x`")
       }
     }
   }
 
   if (isTRUE(is.null(prefix))) {
     prefixes <- unique(matches[, 2])
-    msg("prefix not supplied; detected prefixes are: ", prefixes)
     if (length(prefixes) > 1) {
-      stop("more than one unique prefix was detected in x")
+      err_msg <- "[YYYY] more than one unique prefix was detected in x"
+      stop(err_msg)
     } else {
       prefix <- prefixes
     }
   }
 
   result <- new_YYYY(x = years, timeline = prefix)
-  msg("timeline(result) is: ", timeline(result))
   return(result)
-
-  stop("shouldn't get here")
 
 }
 

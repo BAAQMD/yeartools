@@ -65,8 +65,6 @@ vec_ptype2.double.YYYY <- function (x, y, ...) {
 #' @export
 #' @noRd
 vec_cast.YYYY.YYYY <- function (x, to, ...) {
-  #message("[vec_cast.YYYY.YYYY]")
-  #message("x is: ", x)
   if (isTRUE(identical(timeline(x), timeline(to))) && isFALSE(is.na(timeline(x))) && isFALSE(is.na(timeline(to)))) {
     # pass; timelines are identical
   } else {
@@ -80,17 +78,13 @@ vec_cast.YYYY.YYYY <- function (x, to, ...) {
 #' @export
 #' @noRd
 vec_cast.YYYY.character <- function (x, to, ...) {
-  #message("[vec_cast.YYYY.character] str(x) is: ", str(x))
   result <- YYYY(x)
-  #message("[vec_cast.YYYY.character] str(result) is: ", str(result))
-  #message("[vec_cast.YYYY.character] timeline(result) is: ", timeline(result))
   return(result)
 }
 
 #' @export
 #' @noRd
 vec_cast.character.YYYY <- function (x, to, ...) {
-  #message("[vec_cast.character.YYYY]")
   result <- format(x)
   return(result)
 }
