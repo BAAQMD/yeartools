@@ -1,7 +1,7 @@
 Package: yeartools
 Type: Package
 Title: Provides CY, RY, PY, and BY classes and methods
-Version: 2021.02.18
+Version: 2021.03.03
 Author: David Holstius
 Maintainer: David Holstius <dholstius@baaqmd.gov>
 Description: More about what it does (maybe more than one line)
