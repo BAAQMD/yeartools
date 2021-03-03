@@ -37,6 +37,12 @@ as.POSIXct.YYYY <- function (x, tz = "", ...) {
 #' @note supports regression and prediction use-cases
 #' @noRd
 #' @export
-as.double.YYYY <- function (x, ...) {
-  as.double(elide_year(x, ...))
+as.numeric.YYYY <- function (x, ...) {
+  warning("use as.numeric(elide_year(x))")
+  as.numeric(elide_year(x, ...))
 }
+
+#' @note supports regression and prediction use-cases
+#' @noRd
+#' @export
+as.double.YYYY <- as.numeric.YYYY
