@@ -8,7 +8,7 @@ gather_years(
   input_data,
   value_var,
   year_var = "year",
-  pattern = "([A-Z]Y)([[:digit:]]{4})",
+  pattern = "([CBRP]Y)?([0-9]{4})",
   na.rm = TRUE,
   verbose = getOption("verbose")
 )
