@@ -2,12 +2,15 @@
 % Please edit documentation in R/YYYY-vctrs.R
 \name{vec_ptype2.YYYY.YYYY}
 \alias{vec_ptype2.YYYY.YYYY}
-\title{#' @export
-#' @noRd}
+\title{----------------------------------------------------------------------}
 \usage{
 \method{vec_ptype2}{YYYY.YYYY}(x, y, ...)
 }
 \description{
+vec_ptype2()
+}
+\details{
+----------------------------------------------------------------------
 #' @export
 #' @noRd
 }
