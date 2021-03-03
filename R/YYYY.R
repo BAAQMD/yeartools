@@ -11,10 +11,23 @@ new_YYYY <- function (
   vec_assert(timeline, ptype = character())
 
   msg <- function (...) if(isTRUE(verbose)) message("[new_YYYY] ", ...)
-  stopifnot(all(str_detect(x, "^[0-9]{4}$")))
 
-  result <- vctrs::new_vctr(x, timeline = timeline, class = c("YYYY", "character"))
-  #msg("timeline(result) is: ", timeline(result))
+  x[x == ""] <- NA_character_
+
+  if (length(x) > 0) {
+    #' Only do this if x is non-empty; otherwise the result will be
+    #' a length-1 vector (it'll just be "RY" or whatever `timeline` is)
+    if (isFALSE(all(str_detect(x, "^[0-9]{4}$")))) {
+      print(x)
+      stop()
+    }
+    x <- paste0(timeline, x)
+  }
+
+  result <- vctrs::new_vctr(
+    x,
+    timeline = timeline,
+    class = c("YYYY", "character"))
 
   return(result)
 
