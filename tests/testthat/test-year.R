@@ -4,6 +4,6 @@ test_that("year() works", {
 
   expect_identical(
     year(x),
-    c(2011L, 2012L))
+    as.character(c(2011L, 2012L)))
 
 })
