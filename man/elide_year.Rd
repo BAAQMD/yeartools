@@ -6,19 +6,16 @@
 \title{elide_year}
 \usage{
 elide_year(x, ...)
-
-elide_year(x, ...)
 }
 \arguments{
-\item{x}{`CY`, `BY`, `RY`, or `PY` object}
-
-\item{...}{futher arguments}
+\item{x}{`RY`, `PY`, `CY`, or `BY` object}
 
 \item{verbose}{logical}
 }
 \description{
 To elide distinctions between "CY", "BY", "RY", etc.
 Drops the timeline (that is, prefix) and returns a simple integer.
-
-To elide distinctions between "CY", "BY", "RY", etc.
+}
+\note{
+`elide_years()` is a backwards-compatible alias for `elide_year()`.
 }
