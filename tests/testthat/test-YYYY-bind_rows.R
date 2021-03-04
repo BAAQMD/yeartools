@@ -17,3 +17,9 @@ test_that("bind_rows() works when both are PY", {
   df2 <- tibble(year = PY(2010:2020))
   expect_identical(timeline(bind_rows(df1, df2)$year), "PY")
 })
+
+# test_that("bind_rows() falls back to YYYY when timelines differ", {
+#   df1 <- tibble(year = PY(2000:2009))
+#   df2 <- tibble(year = RY(2010:2020))
+#   expect_is(timeline(bind_rows(df1, df2)$year), "YYYY")
+# })

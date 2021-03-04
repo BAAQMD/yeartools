@@ -135,18 +135,18 @@ vec_cast.double.YYYY <- function (x, to, ...) {
 #'
 #'----------------------------------------------------------------------
 
-#' #' @export
-#' #' @noRd
-#' vec_c.YYYY.YYYY <- function (x, y, verbose = TRUE) {
-#'   msg <- function (...) if(isTRUE(verbose)) message("[vec_c] ", ...)
-#'   if (timeline(x) == timeline(y)) {
-#'     msg("timeline(x) is: ", timeline(x))
-#'     year <- c(elide_year(x), elide_year(y))
-#'     result <- new_YYYY(year, timeline = timeline(x))
-#'     msg("timeline(result) is: ", timeline(result))
-#'   } else {
-#'     warning("coercing to character")
-#'     c(as.character(x), as.character(y))
-#'   }
-#'   return(result)
-#' }
+#' @export
+#' @noRd
+vec_c.YYYY.YYYY <- function (x, y, verbose = TRUE) {
+  msg <- function (...) if(isTRUE(verbose)) message("[vec_c] ", ...)
+  if (timeline(x) == timeline(y)) {
+    msg("timeline(x) is: ", timeline(x))
+    year <- c(elide_year(x), elide_year(y))
+    result <- new_YYYY(year, timeline = timeline(x))
+    msg("timeline(result) is: ", timeline(result))
+  } else {
+    warning("coercing to YYYY")
+    c(as.character(x), as.character(y))
+  }
+  return(result)
+}
