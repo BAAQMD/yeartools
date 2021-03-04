@@ -39,5 +39,6 @@ elide_year.data.frame <- function (x, ...) {
 }
 
 #' elide_years
+#' @export
 #' @noRd
 elide_years <- elide_year
