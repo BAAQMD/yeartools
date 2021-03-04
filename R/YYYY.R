@@ -1,11 +1,11 @@
 new_YYYY <- function (
   x = character(),
-  timeline,
+  timeline = NULL,
   verbose = TRUE
 ) {
 
   vec_assert(x, ptype = character())
-  vec_assert(timeline, ptype = character())
+  #vec_assert(timeline, ptype = character())
 
   msg <- function (...) if(isTRUE(verbose)) message("[new_YYYY] ", ...)
 
@@ -15,10 +15,11 @@ new_YYYY <- function (
     #' Only do this if x is non-empty; otherwise the result will be
     #' a length-1 vector (it'll just be "RY" or whatever `timeline` is)
     if (isFALSE(all(str_detect(x, "^[0-9]{4}$")))) {
-      print(x)
       stop()
     }
-    x <- paste0(timeline, x)
+    if (isFALSE(is.null(timeline)) && isFALSE(is.na(timeline))) {
+      x <- paste0(timeline, x)
+    }
   }
 
   result <- vctrs::new_vctr(
@@ -65,7 +66,7 @@ YYYY <- function(
   # When the timelines are identical, we just return `x` unchanged.
   if (inherits(x, "YYYY")) {
     msg("x is a YYYY object")
-    if (prefix == timeline(x)) {
+    if (prefix == timeline(x)) { # FIXME: what if timeline(x) is `NULL`?
       return(x) # nothing to do
     } else {
       err_msg <- paste0("[YYYY] can't automatically align ", timeline(x), " with ", prefix)

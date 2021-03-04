@@ -1,3 +1,6 @@
+#' @importFrom vctrs vec_ptype2 vec_cast
+NULL
+
 #'----------------------------------------------------------------------
 #'
 #' vec_ptype_abbr() and vec_ptype_full()
@@ -7,13 +10,21 @@
 #' @export
 #' @noRd
 vec_ptype_abbr.YYYY <- function (x, ...) {
-  attr(x, "timeline")
+  if (is.na(timeline(x))) {
+    return("YYYY")
+  } else {
+    return(timeline(x))
+  }
 }
 
 #' @export
 #' @noRd
 vec_ptype_full.YYYY <- function(x, ...) {
-  timeline(x)
+  if (is.na(timeline(x))) {
+    return("YYYY")
+  } else {
+    return(timeline(x))
+  }
 }
 
 #'----------------------------------------------------------------------
@@ -28,8 +39,9 @@ vec_ptype2.YYYY.YYYY <- function (x, y, ...) {
   if (isTRUE(timeline(x) == timeline(y))) {
     return(x)
   } else {
-    stop_incompatible_type(
-      message = "timelines are incompatible")
+    return(YYYY(x))
+    # stop_incompatible_type(
+    #   message = "timelines are incompatible")
   }
 }
 
@@ -67,12 +79,14 @@ vec_ptype2.double.YYYY <- function (x, y, ...) {
 vec_cast.YYYY.YYYY <- function (x, to, ...) {
   if (isTRUE(identical(timeline(x), timeline(to))) && isFALSE(is.na(timeline(x))) && isFALSE(is.na(timeline(to)))) {
     # pass; timelines are identical
+    return(x)
   } else {
-    stop_incompatible_cast(
-      x = x, to = to, x_arg = "x", to_arg = "to",
-      message = "[vec_cast] incompatible timelines")
+    # stop_incompatible_cast(
+    #   x = x, to = to, x_arg = "x", to_arg = "to",
+    #   message = "[vec_cast] incompatible timelines")
+    warning("demoting to YYYY")
+    return(YYYY(elide_year(x)))
   }
-  return(x)
 }
 
 #' @export
