@@ -38,3 +38,9 @@ test_that("ordering works", {
   expect_true("CY2012" >= CY(2011))
 
 })
+
+test_that("%in% works", {
+
+  expect_true(BY(2011) %in% paste0("BY", c(2011, 2015)))
+
+})
