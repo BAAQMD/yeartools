@@ -5,7 +5,7 @@
 \title{Only do this if x is non-empty; otherwise the result will be
 a length-1 vector (it'll just be "RY" or whatever `timeline` is)}
 \usage{
-new_YYYY(x = character(), timeline, verbose = TRUE)
+new_YYYY(x = character(), timeline = NULL, verbose = TRUE)
 }
 \description{
 Only do this if x is non-empty; otherwise the result will be

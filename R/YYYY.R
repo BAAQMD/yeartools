@@ -14,7 +14,7 @@ new_YYYY <- function (
   if (length(x) > 0) {
     #' Only do this if x is non-empty; otherwise the result will be
     #' a length-1 vector (it'll just be "RY" or whatever `timeline` is)
-    if (isFALSE(all(str_detect(x, "^[0-9]{4}$")))) {
+    if (isFALSE(all(stringr::str_detect(x, "^[0-9]{4}$")))) {
       stop()
     }
     if (isFALSE(is.null(timeline)) && isFALSE(is.na(timeline))) {
