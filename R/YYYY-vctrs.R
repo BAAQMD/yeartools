@@ -1,11 +1,11 @@
-#' @importFrom vctrs vec_ptype2 vec_cast
+#' @importFrom vctrs vec_ptype_abbr vec_ptype_full vec_ptype2 vec_cast vec_c stop_incompatible_type
 NULL
 
-#'----------------------------------------------------------------------
-#'
-#' vec_ptype_abbr() and vec_ptype_full()
-#'
-#'----------------------------------------------------------------------
+#----------------------------------------------------------------------
+#
+# vec_ptype_abbr() and vec_ptype_full()
+#
+#----------------------------------------------------------------------
 
 #' @export
 #' @noRd
@@ -27,20 +27,20 @@ vec_ptype_full.YYYY <- function(x, ...) {
   }
 }
 
-#'----------------------------------------------------------------------
-#'
-#' vec_ptype2()
-#'
-#'----------------------------------------------------------------------
+#----------------------------------------------------------------------
+#
+# vec_ptype2()
+#
+#----------------------------------------------------------------------
 
-#' #' @export
-#' #' @noRd
+#' @export
+#' @noRd
 vec_ptype2.YYYY.YYYY <- function (x, y, ...) {
   if (isTRUE(timeline(x) == timeline(y))) {
     return(x)
   } else {
     return(YYYY(x))
-    # stop_incompatible_type(
+    # vctrs::stop_incompatible_type(
     #   message = "timelines are incompatible")
   }
 }
@@ -68,11 +68,11 @@ vec_ptype2.double.YYYY <- function (x, y, ...) {
   y
 }
 
-#'----------------------------------------------------------------------
-#'
-#' vec_cast()
-#'
-#'----------------------------------------------------------------------
+#----------------------------------------------------------------------
+#
+# vec_cast()
+#
+#----------------------------------------------------------------------
 
 #' @export
 #' @noRd
@@ -111,7 +111,7 @@ vec_cast.YYYY.double <- function (x, to, ...) {
     "Use CY(), BY(), RY(), or PY() to promote doubles to YYYY objects.",
     "Use elide_year() or parse_year() to drop timelines from YYYY objects.",
     "See examples in `?elide_year`, `?parse_year`, and `?YYYY`.")
-  stop_incompatible_type(
+  vctrs::stop_incompatible_type(
     x, to, x_arg = "x", y_arg = "to",
     message = err_msg)
 }
@@ -124,16 +124,16 @@ vec_cast.double.YYYY <- function (x, to, ...) {
     "Use CY(), BY(), RY(), or PY() to promote doubles to YYYY objects.",
     "Use elide_year() or parse_year() to drop timelines from YYYY objects.",
     "See examples in `?elide_year`, `?parse_year`, and `?YYYY`.")
-  stop_incompatible_type(
+  vctrs::stop_incompatible_type(
     x, to, x_arg = "x", y_arg = "to",
     message = err_msg)
 }
 
-#'----------------------------------------------------------------------
-#'
-#' vec_c()
-#'
-#'----------------------------------------------------------------------
+#----------------------------------------------------------------------
+#
+# vec_c()
+#
+#----------------------------------------------------------------------
 
 #' @export
 #' @noRd

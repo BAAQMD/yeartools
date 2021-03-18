@@ -1,3 +1,11 @@
+#' new_YYYY
+#'
+#' @param x four-character year, like "2014"
+#' @param timeline two-character prefix, like "RY" or "CY"
+#' @param verbose logical
+#'
+#' @importFrom stringr str_detect
+#'
 new_YYYY <- function (
   x = character(),
   timeline = NULL,
@@ -12,8 +20,8 @@ new_YYYY <- function (
   x[x == ""] <- NA_character_
 
   if (length(x) > 0) {
-    #' Only do this if x is non-empty; otherwise the result will be
-    #' a length-1 vector (it'll just be "RY" or whatever `timeline` is)
+    # Only do this if x is non-empty; otherwise the result will be
+    # a length-1 vector (it'll just be "RY" or whatever `timeline` is)
     if (isFALSE(all(stringr::str_detect(x, "^[0-9]{4}$")))) {
       stop()
     }
@@ -33,8 +41,13 @@ new_YYYY <- function (
 
 #' Typically we should call `YYYY()` rather than `new_YYYY()`.
 #'
+#' @param x four-character year, like "2014"
+#' @param ... concatenated with `x`
+#' @param prefix two-character prefix, like "RY" or "CY"
+#' @param pattern `x` (and `...`, if supplied) need to match this
+#' @param verbose logical
+#'
 #' @export
-#' @noRd
 YYYY <- function(
   x = character(),
   ...,
@@ -109,26 +122,26 @@ YYYY <- function(
 
 }
 
+#' @describeIn YYYY shortcut for `YYYY(..., prefix = "RY")`
 #' @export
-#' @noRd
 RY <- function (x = character(), ...) {
   YYYY(x, ..., prefix = "RY")
 }
 
+#' @describeIn YYYY shortcut for `YYYY(..., prefix = "PY")`
 #' @export
-#' @noRd
 PY <- function (x = character(), ...) {
   YYYY(x, ..., prefix = "PY")
 }
 
+#' @describeIn YYYY shortcut for `YYYY(..., prefix = "BY")`
 #' @export
-#' @noRd
 BY <- function (x = character(), ...) {
   YYYY(x, ..., prefix = "BY")
 }
 
+#' @describeIn YYYY shortcut for `YYYY(..., prefix = "CY")`
 #' @export
-#' @noRd
 CY <- function (x = character(), ...) {
   YYYY(x, ..., prefix = "CY")
 }

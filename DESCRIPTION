@@ -27,7 +27,6 @@ Imports:
   purrr,
   rlang,
   stringr,
-  lubridate,
   pillar,
   tibble,
   methods,

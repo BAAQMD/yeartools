@@ -3,14 +3,20 @@
 \name{elide_year}
 \alias{elide_year}
 \alias{elide_years}
+\alias{elide_year.default}
+\alias{elide_year.data.frame}
 \title{elide_year}
 \usage{
 elide_year(x, ...)
+
+\method{elide_year}{default}(x, ...)
+
+\method{elide_year}{data.frame}(x, ...)
 }
 \arguments{
-\item{x}{`RY`, `PY`, `CY`, or `BY` object}
+\item{x}{data.frame}
 
-\item{verbose}{logical}
+\item{...}{reserved for future use}
 }
 \description{
 To elide distinctions between "CY", "BY", "RY", etc.

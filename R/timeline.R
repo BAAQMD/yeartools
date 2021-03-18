@@ -12,8 +12,10 @@ timeline <- function (x) {
 
 #' @rdname timeline
 #'
+#' @importFrom stats na.omit
+#'
 #' @export
-timeline.YYYY <- function (x) {
+timeline.default <- function (x) {
 
   pattern <- "^([CRPB]Y)?([0-9]{4})$"
 
@@ -22,7 +24,7 @@ timeline.YYYY <- function (x) {
   }
 
   matches <- stringr::str_match(x, pattern)
-  prefix <- unique(na.omit(matches[, 2]))
+  prefix <- unique(stats::na.omit(matches[, 2]))
 
   if (length(prefix) == 1) {
     return(prefix)
