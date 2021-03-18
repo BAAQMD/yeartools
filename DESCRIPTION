@@ -8,9 +8,8 @@ Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT
 Depends:
-  dplyr,
-  purrr,
-  vctrs
+  vctrs,
+  R (>= 3.5)
 Reverse-Depends:
   DataBank,
   inventory
@@ -30,13 +29,15 @@ Imports:
   stringr,
   lubridate,
   pillar,
-  funtools,
-  vartools,
   tibble,
   methods,
   readr,
-  strtools,
-  vctrs
+  tidyr,
+  tidyselect
+Remotes:
+  github::BAAQMD/vartools,
+  github::BAAQMD/funtools,
+  github::BAAQMD/strtools
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
