@@ -15,17 +15,17 @@ spread_years(
 \arguments{
 \item{input_data}{(tabular data)}
 
-\item{value_var}{(character or symbol) defaults to whatever is returned by \code{\link[=find_qty_var]{find_qty_var()}}.}
+\item{value_var}{(character or symbol) defaults to whatever is returned by [find_qty_var()].}
 
-\item{year_var}{(character) defaults to whatever is found by \code{\link[=find_year_var]{find_year_var()}}.}
+\item{year_var}{(character) defaults to whatever is found by [find_year_var()].}
 
-\item{...}{(dots) passed to \code{\link[tidyr:spread]{tidyr::spread()}}}
+\item{...}{(dots) passed to [tidyr::spread()]}
 
 \item{verbose}{(logical) display messages}
 }
 \value{
-tabular data with column \code{year}
+tabular data with column `year`
 }
 \description{
-Spread \code{year} into columns.
+Spread `year` into columns.
 }

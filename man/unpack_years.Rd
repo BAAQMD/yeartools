@@ -9,7 +9,7 @@ unpack_years(input_data, year_var = NULL, verbose = getOption("verbose"))
 \arguments{
 \item{input_data}{tabular data}
 
-\item{year_var}{character or \code{NULL}}
+\item{year_var}{character or `NULL`}
 
 \item{verbose}{display messages}
 }
@@ -26,5 +26,5 @@ unpack_years(input_data)
 
 }
 \seealso{
-\code{\link[=RY]{RY()}} \code{\link[=PY]{PY()}}
+[RY()] [PY()]
 }

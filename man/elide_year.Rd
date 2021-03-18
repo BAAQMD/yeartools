@@ -2,16 +2,26 @@
 % Please edit documentation in R/elide_year.R
 \name{elide_year}
 \alias{elide_year}
+\alias{elide_years}
+\alias{elide_year.default}
+\alias{elide_year.data.frame}
 \title{elide_year}
 \usage{
-elide_year(x, pattern = "([CRPB]Y)?([0-9]{4})", verbose = getOption("verbose"))
+elide_year(x, ...)
+
+\method{elide_year}{default}(x, ...)
+
+\method{elide_year}{data.frame}(x, ...)
 }
 \arguments{
-\item{x}{\code{RY}, \code{PY}, \code{CY}, or \code{BY} object}
+\item{x}{data.frame}
 
-\item{verbose}{logical}
+\item{...}{reserved for future use}
 }
 \description{
 To elide distinctions between "CY", "BY", "RY", etc.
 Drops the timeline (that is, prefix) and returns a simple integer.
+}
+\note{
+`elide_years()` is a backwards-compatible alias for `elide_year()`.
 }

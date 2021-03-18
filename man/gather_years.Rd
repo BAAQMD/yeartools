@@ -8,7 +8,7 @@ gather_years(
   input_data,
   value_var,
   year_var = "year",
-  pattern = "([A-Z]Y)([[:digit:]]{4})",
+  pattern = "([CBRP]Y)?([0-9]{4})",
   na.rm = TRUE,
   verbose = getOption("verbose")
 )
@@ -22,13 +22,13 @@ gather_years(
 
 \item{pattern}{(regexp) gather columns matching this}
 
-\item{na.rm}{(logical) drop rows from output where value would be \code{NA}}
+\item{na.rm}{(logical) drop rows from output where value would be `NA`}
 
 \item{verbose}{(logical) display messages}
 }
 \value{
-tabular data with column \code{year}
+tabular data with column `year`
 }
 \description{
-Gather columns beginning with \code{CY}, \code{RY}, \code{PY}, as well as columns that look like "naive" four-digit years.
+Gather columns beginning with `CY`, `RY`, `PY`, as well as columns that look like "naive" four-digit years.
 }

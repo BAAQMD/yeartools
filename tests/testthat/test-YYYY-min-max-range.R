@@ -1,4 +1,4 @@
-x <- new_YYYY(c(2010, 2005, 2019), timeline = "CY")
+x <- CY(2010, 2005, 2019)
 
 test_that("min() works", {
   expect_equal(min(x), CY(2005))

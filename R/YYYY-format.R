@@ -1,18 +1,7 @@
-#' @param x `YYYY` object
-#' @param ... ignored
-#'
-#' @noRd
 #' @export
 format.YYYY <- function (x, ...) {
-  sprintf("%s%d", timeline(x), x)
-}
-
-#' @param x `YYYY` object
-#' @param ... ignored
-#' @noRd
-#'
-#' @export
-print.YYYY <- function (x, ...) {
-  x <- as.character(x)
-  NextMethod()
+  #out <- paste0(timeline(x), x)
+  out <- format(unclass(x))
+  out[is.na(x)] <- NA_character_
+  return(out)
 }
